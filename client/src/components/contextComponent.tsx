@@ -4,14 +4,13 @@ import { fetchArtists, fetchProjects } from "../ApiService.ts";
 // types
 import Artist from "../types/Artist";
 import Project from "../types/Project";
+import { ArtistListContextType } from "../types/ArtistListContextType.ts";
 
-const ArtistListContext = createContext({});
 
-interface contextComponentProps {
-  children: ReactNode;
-}
+export const ArtistListContext = createContext<ArtistListContextType | null>(null);
 
-const ContextComponent: FC<contextComponentProps> = ({ children }) {
+
+export const ContextComponent: FC<{children: ReactNode}>= ({ children }) => {
   const [fullArtists, setFullArtists] = useState<Artist[]>([]);
   const [fullProjects, setFullProjects] = useState<Project[]>([]);
 
