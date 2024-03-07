@@ -4,6 +4,7 @@ import "./AddProjectForm.css";
 import { useState } from "react";
 // types
 import Project from '../../types/Project';
+import Artist from '../../types/Artist';
 
 interface AddProjectProps {
   formVisibility: boolean;
@@ -64,7 +65,7 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
         endDate: newEndDate,
         thumbImage: newThumbnail,
       };
-      const savedProject = await postProject(newProject);
+      const savedProject: <Promise<Project>> = await postProject(newProject);
       setProjects((state) => [...state, savedProject]);
 
       setNewDescription("");
