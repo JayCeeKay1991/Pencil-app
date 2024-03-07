@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, SetStateAction, Dispatch } from 'react'
+import { FC, ChangeEvent, SetStateAction, Dispatch, MouseEvent} from 'react'
 import { postProject } from "../../ApiService";
 import "./AddProjectForm.css";
 import { useState } from "react";
@@ -46,7 +46,7 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
     }
   }
 
-  async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+  async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (
       newDescription &&
