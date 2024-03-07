@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { ArtistListItem } from "../ArtistListItem/ArtistListItem.jsx";
-import { PageTitle } from "../PageTitle/pageTitle.jsx";
-import { SearchBar } from "../SearchBar/SearchBar.jsx";
-import { useMainContext } from "../contextComponent.jsx";
-import { Loading } from "../Loading/Loading.jsx";
+import { ArtistListItem } from "../ArtistListItem/ArtistListItem.js";
+import { PageTitle } from "../PageTitle/pageTitle.js";
+import { SearchBar } from "../SearchBar/SearchBar.js";
+import { useMainContext } from "../contextComponent.js";
+import { Loading } from "../Loading/Loading.js";
 import { motion, AnimatePresence } from "framer-motion";
 import "./ArtistList.css";
 

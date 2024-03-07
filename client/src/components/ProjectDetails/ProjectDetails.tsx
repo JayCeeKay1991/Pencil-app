@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ProjectDetailsItem } from "../ProjectDetailsItem/ProjectDetailsItem.jsx";
-import { PageTitle } from "../PageTitle/pageTitle.jsx";
+import { ProjectDetailsItem } from "../ProjectDetailsItem/ProjectDetailsItem.js";
+import { PageTitle } from "../PageTitle/pageTitle.js";
 import "./ProjectDetails.css";
 import { getLikes, fetchProjects } from "../../ApiService.js";
-import { Loading } from "../Loading/Loading.jsx";
+import { Loading } from "../Loading/Loading.js";
 
 export function ProjectDetails() {
   const [likedArtists, setLikedArtists] = useState([]);

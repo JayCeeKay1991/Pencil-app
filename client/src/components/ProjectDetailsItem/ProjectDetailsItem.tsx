@@ -1,6 +1,6 @@
-import { updateLikes, updateDislikes } from "../../ApiService";
+import { updateLikes, updateDislikes } from "../../ApiService.js";
 import { useState, useEffect } from "react";
-import { useMainContext } from "../contextComponent.jsx";
+import { useMainContext } from "../contextComponent.js";
 import "./ProjectDetailsItem.css";
 import { PiThumbsUpLight } from "react-icons/pi";
 import { PiThumbsDownLight } from "react-icons/pi";

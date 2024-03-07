@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useMainContext } from "../contextComponent.jsx";
-import { PageTitle } from "../PageTitle/pageTitle.jsx";
-import { ProjectListItem } from "../ProjectListItem/ProjectListItem.jsx";
-import { AddProject } from "../AddProjectForm/AddProjectForm.jsx";
+import { useMainContext } from "../contextComponent.js";
+import { PageTitle } from "../PageTitle/pageTitle.js";
+import { ProjectListItem } from "../ProjectListItem/ProjectListItem.js";
+import { AddProject } from "../AddProjectForm/AddProjectForm.js";
 import "./ProjectList.css";
-import { Loading } from "../Loading/Loading.jsx";
+import { Loading } from "../Loading/Loading.js";
 
 export function ProjectList() {
   const { fullProjects, setFullProjects } = useMainContext();

@@ -1,14 +1,13 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ArtistList } from './components/ArtistList/ArtistList.jsx';
-import { ProjectList } from './components/ProjectsList/ProjectList.jsx';
-import { ProjectDetails } from './components/ProjectDetails/ProjectDetails.jsx';
-import { ArtistDetails } from './components/ArtistDetails/ArtistDetails.jsx';
-import { Nav } from './components/NavBar/Nav.jsx';
+import { ArtistList } from './components/ArtistList/ArtistList.js';
+import { ProjectList } from './components/ProjectsList/ProjectList.js';
+import { ProjectDetails } from './components/ProjectDetails/ProjectDetails.js';
+import { ArtistDetails } from './components/ArtistDetails/ArtistDetails.js';
+import { Nav } from './components/NavBar/Nav.js';
 import './index.css'
-import App from './App.jsx'
-import { ContextComponent } from './components/contextComponent.jsx';
+import App from './App.js'
+import { ContextComponent } from './components/contextComponent.js';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>

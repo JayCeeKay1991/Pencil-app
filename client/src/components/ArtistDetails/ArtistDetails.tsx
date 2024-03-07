@@ -1,10 +1,10 @@
 import "./ArtistDetails.css";
 import { useParams } from "react-router-dom";
-import { useMainContext } from "../contextComponent.jsx";
-import { PageTitle } from "../PageTitle/pageTitle.jsx";
+import { useMainContext } from "../contextComponent.js";
+import { PageTitle } from "../PageTitle/pageTitle.js";
 import { useState, useEffect } from "react";
-import { DropDownListSecond } from "../DropDownListSecond/DropDownListSecond.jsx";
-import { Loading } from "../Loading/Loading.jsx";
+import { DropDownListSecond } from "../DropDownListSecond/DropDownListSecond.js";
+import { Loading } from "../Loading/Loading.js";
 
 export function ArtistDetails() {
   const { fullArtists, setFullArtists } = useMainContext();
