@@ -1,39 +1,40 @@
-import { FC } from 'react'
+import { FC, ChangeEvent, SetStateAction, Dispatch } from 'react'
 import { postProject } from "../../ApiService";
 import "./AddProjectForm.css";
 import { useState } from "react";
+// types
+import Project from '../../types/Project';
 
 interface AddProjectProps {
   formVisibility: boolean;
-  setFormVisibilty: () => void;
-  setProjects: () => void;
-
+  setFormVisibilty: (arg: boolean) => void;
+  setProjects: Dispatch<SetStateAction<Project[]>>;
 }
 
-const AddProject: FC({ formVisibility, setFormVisibilty, setProjects }) {
+export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibilty, setProjects }) => {
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newStartDate, setNewStartDate] = useState("");
   const [newEndDate, setNewEndDate] = useState("");
   const [newThumbnail, setNewThumbnail] = useState("");
 
-  function handleChangeName(e) {
+  function handleChangeName(e: ChangeEvent<HTMLInputElement>) {
     setNewName(e.target.value);
   }
 
-  function handleChangeDescription(e) {
+  function handleChangeDescription(e: ChangeEvent<HTMLInputElement>) {
     setNewDescription(e.target.value);
   }
 
-  function handleChangeStartDate(e) {
+  function handleChangeStartDate(e: ChangeEvent<HTMLInputElement> ) {
     setNewStartDate(e.target.value);
   }
 
-  function handleChangeEndDate(e) {
+  function handleChangeEndDate(e: ChangeEvent<HTMLInputElement>) {
     setNewEndDate(e.target.value);
   }
 
-  function handleChangeThumbnail(e) {
+  function handleChangeThumbnail(e: ChangeEvent<HTMLInputElement>) {
     setNewThumbnail(e.target.value);
   }
 
@@ -45,7 +46,7 @@ const AddProject: FC({ formVisibility, setFormVisibilty, setProjects }) {
     }
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     if (
       newDescription &&
@@ -55,7 +56,7 @@ const AddProject: FC({ formVisibility, setFormVisibilty, setProjects }) {
       newThumbnail
     ) {
       const newOwner = "user";
-      const project = {
+      const project: Project = {
         projectOwner: newOwner,
         description: newDescription,
         projectName: newName,
