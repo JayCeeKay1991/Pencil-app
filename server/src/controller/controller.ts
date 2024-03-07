@@ -3,7 +3,7 @@ import  { Artist, Projects, ArtistLikes } from "../models/events";
 import { ArtistType, ProjectsType, ArtistLikesType } from "../models/events";
 
 //Get Artists
-exports.getArtists = async (req:Request, res:Response) => {
+export const getArtists = async (req:Request, res:Response) => {
   try {
     const event:ArtistType[] = await Artist.find({});
     res.status(200);
@@ -16,7 +16,7 @@ exports.getArtists = async (req:Request, res:Response) => {
 };
 
 //Post Artist
-exports.addArtist = async (req:Request, res:Response) => {
+export const addArtist = async (req:Request, res:Response) => {
   try {
     const event:ArtistType = await Artist.create(req.body);
     res.status(201);
@@ -30,7 +30,7 @@ exports.addArtist = async (req:Request, res:Response) => {
 };
 
 //Get projects
-exports.getProjects = async (req:Request, res:Response) => {
+export const getProjects = async (req:Request, res:Response) => {
   try {
     const projects:ProjectsType[] = await Projects.find().populate("artists");
     console.log({ projects });
@@ -44,7 +44,7 @@ exports.getProjects = async (req:Request, res:Response) => {
 };
 
 //Get one project
-exports.getOneProject = async (req:Request, res:Response) => {
+export const getOneProject = async (req:Request, res:Response) => {
   try {
     const id = req.params.id;
     const project:ArtistLikesType[] = await ArtistLikes.find({ project: id });
@@ -58,7 +58,7 @@ exports.getOneProject = async (req:Request, res:Response) => {
 };
 
 //Post project
-exports.addProject = async (req:Request, res:Response) => {
+export const addProject = async (req:Request, res:Response) => {
   try {
     const event:ProjectsType = await Projects.create(req.body);
     res.status(201);
@@ -72,7 +72,7 @@ exports.addProject = async (req:Request, res:Response) => {
 };
 
 //Update projects list
-exports.putProject = async (req:Request, res:Response) => {
+export const putProject = async (req:Request, res:Response) => {
   try {
     const projectId:String = req.params.id;
     const artist:ArtistType = req.body;
@@ -97,7 +97,7 @@ exports.putProject = async (req:Request, res:Response) => {
 };
 
 //Get projects
-exports.getArtistLikes = async (req:Request, res:Response) => {
+export const getArtistLikes = async (req:Request, res:Response) => {
   try {
     const event:ArtistLikesType[] = await ArtistLikes.find({});
     res.status(200);
@@ -110,7 +110,7 @@ exports.getArtistLikes = async (req:Request, res:Response) => {
 };
 
 //Update likes
-exports.updateLikes = async (req:Request, res:Response) => {
+export const updateLikes = async (req:Request, res:Response) => {
 try {
     const id = req.params.id;
     console.log(id);
@@ -130,7 +130,7 @@ try {
 };
 
 //Update Dislikes
-exports.updateDislikes = async (req:Request, res:Response) => {
+export const updateDislikes = async (req:Request, res:Response) => {
   try {
     const id = req.params.id;
     console.log(id);
