@@ -6,11 +6,11 @@ type ProjectsType = InferSchemaType<typeof projectSchema>;
 type ArtistLikesType = InferSchemaType<typeof artistLikes>;
 
 const artistSchema = new Schema({
-  name: String,
-  location: String,
-  rate: String,
+  name: {type: String, required: true},
+  location: {type: String, required: true},
+  rate: {type: String, required: true},
   skills: [String],
-  mainSkill: String,
+  mainSkill: {type: String, required: true},
   profileImg: String,
   work: [
     {
@@ -21,9 +21,9 @@ const artistSchema = new Schema({
 });
 
 const projectSchema = new Schema({
-  projectOwner: String,
+  projectOwner: {type: String, required: true},
   description: String,
-  projectName: String,
+  projectName: {type: String, required: true},
   startDate: Date,
   endDate: Date,
   thumbImage: String,
@@ -40,18 +40,22 @@ const artistLikes = new Schema({
   artist: {
     type: mongoose.Types.ObjectId,
     ref: "Artist",
+    required: true
   },
   numberOfLikes: {
     type: Number,
     default: 0,
+    required: true
   },
   numberOfDislikes: {
     type: Number,
     default: 0,
+    required: true
   },
   project: {
     type: mongoose.Types.ObjectId,
     ref: "Projects",
+    required: true
   },
 });
 
