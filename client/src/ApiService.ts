@@ -10,10 +10,12 @@ const projectsUrl = "http://localhost:3000/projects";
 export async function fetchArtists() {
   try {
     const response = await fetch(artistsUrl);
-    const jsonData:Artist = await response.json();
+    const jsonData:Artist[] = await response.json();
     return jsonData;
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error fetching artists')
+
   }
 }
 
@@ -25,6 +27,7 @@ export async function fetchProjects() {
     return jsonData;
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error fetching projects')
   }
 }
 
@@ -76,6 +79,8 @@ export async function getLikes(id:string) {
     return data;
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error fetching likes')
+
   }
 }
 
@@ -90,6 +95,8 @@ export async function updateLikes(id:string) {
     });
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error updating likes')
+
   }
 }
 
@@ -104,5 +111,7 @@ export async function updateDislikes(id:string) {
     });
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error  updating dislikes')
+
   }
 }
