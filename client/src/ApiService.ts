@@ -29,7 +29,7 @@ export async function fetchProjects() {
 }
 
 //Add artist to list
-export async function addArtist(obj:Artist, projectId:string) {
+export async function addArtist(obj:Partial<Artist>, projectId:string) {
   try {
     const response = await fetch(projectsUrl + "/" + projectId, {
       method: "PUT",
@@ -47,7 +47,7 @@ export async function addArtist(obj:Artist, projectId:string) {
 }
 
 //Post data
-export async function postProject(project:Project) {
+export async function postProject(project: Partial<Project>) {
   try {
     const response = await fetch(projectsUrl, {
       method: "POST",
