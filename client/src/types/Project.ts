@@ -3,8 +3,8 @@ export default interface Project {
     projectName: string;
     projectOwner: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
     thumbImage: string;
-    artists: Artist[];
+    // artists: Artist[];
 }
