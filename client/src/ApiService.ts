@@ -42,6 +42,7 @@ export async function addArtist(obj:Artist, projectId:string) {
     return newArtist;
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error adding artist')
   }
 }
 
@@ -60,6 +61,8 @@ export async function postProject(project:Project) {
 
   } catch (error) {
     console.error(error);
+    throw new Error('Unexpected error adding project')
+
   }
 }
 
