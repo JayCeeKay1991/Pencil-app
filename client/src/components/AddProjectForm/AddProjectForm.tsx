@@ -65,7 +65,7 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
         endDate: newEndDate,
         thumbImage: newThumbnail,
       };
-      const savedProject: <Promise<Project>> = await postProject(newProject);
+      const savedProject = await postProject(newProject);
       setProjects((state) => [...state, savedProject]);
 
       setNewDescription("");
