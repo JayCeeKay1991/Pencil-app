@@ -4,14 +4,14 @@ import { fetchProjects } from "../../ApiService.js";
 import Project from "../../types/Project.js";
 
 interface DropDownListProps {
-  onSelectProject: () => void;
+  onSelectProject: (id: string) => void;
 }
 
 
-export const DropDownListSecond: FC<DropDownListProps> = ({ onSelectProject }) {
+export const DropDownListSecond = (props: DropDownListProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<string>("");
 
   useEffect(() => {
     async function fetchAndSet() {
@@ -27,9 +27,9 @@ export const DropDownListSecond: FC<DropDownListProps> = ({ onSelectProject }) {
   };
 
   // Handle click
-  const handleProjectSelect = (projectId) => {
+  const handleProjectSelect = (projectId: string) => {
     setSelectedProject(projectId);
-    onSelectProject(projectId);
+    props.onSelectProject(projectId);
     setIsDropdownOpen(false);
   };
 

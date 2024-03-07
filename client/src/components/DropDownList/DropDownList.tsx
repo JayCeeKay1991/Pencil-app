@@ -18,7 +18,7 @@ export const DropDownList = (props: DropDownListProps) => {
       setProjects(data);
     }
     fetchAndSet();
-  }, []);
+  }, []);git 
 
   // Toggle dropdown
   const toggleDropdown = () => {
