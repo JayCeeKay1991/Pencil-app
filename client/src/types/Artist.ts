@@ -4,6 +4,7 @@ interface Work {
 }
 
 export default interface Artist {
+    _id: string;
     name: string;
     location: string,
     rate: string,
