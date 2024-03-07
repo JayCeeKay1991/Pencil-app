@@ -1,12 +1,19 @@
 // contextComponent.js
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { fetchArtists, fetchProjects } from "../ApiService.js";
+import { createContext, useState, useEffect, useContext, FC, ReactNode } from "react";
+import { fetchArtists, fetchProjects } from "../ApiService.ts";
+// types
+import Artist from "../types/Artist";
+import Project from "../types/Project";
 
 const ArtistListContext = createContext({});
 
-export function ContextComponent({ children }) {
-  const [fullArtists, setFullArtists] = useState([]);
-  const [fullProjects, setFullProjects] = useState([]);
+interface contextComponentProps {
+  children: ReactNode;
+}
+
+const ContextComponent: FC<contextComponentProps> = ({ children }) {
+  const [fullArtists, setFullArtists] = useState<Artist[]>([]);
+  const [fullProjects, setFullProjects] = useState<Project[]>([]);
 
   useEffect(() => {
     async function fetchAndSet() {
