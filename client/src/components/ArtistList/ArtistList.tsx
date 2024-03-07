@@ -8,7 +8,7 @@ import "./ArtistList.css";
 import Artist from "../../types/Artist";
 
 
-export function ArtistList() {
+export const ArtistList = () => {
   const { fullArtists, setFullArtists } = useMainContext();
   const [artists, setArtists] = useState<Artist[]>([]);
   const [filter, setFilter] = useState<string>("name");
@@ -25,7 +25,6 @@ export function ArtistList() {
 
   function filterSearched(e: ChangeEvent<HTMLInputElement>) {
     const searchValue = e.target.value.toLowerCase();
-
     if (!searchValue) {
       setArtists(fullArtists);
     } else {
