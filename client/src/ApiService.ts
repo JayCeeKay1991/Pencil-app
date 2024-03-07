@@ -31,13 +31,15 @@ export async function fetchProjects() {
 //Add artist to list
 export async function addArtist(obj:Artist, projectId:string) {
   try {
-    return await fetch(projectsUrl + "/" + projectId, {
+    const response = await fetch(projectsUrl + "/" + projectId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(obj),
     });
+    const newArtist: Artist = await response.json();
+    return newArtist;
   } catch (error) {
     console.error(error);
   }
@@ -46,13 +48,15 @@ export async function addArtist(obj:Artist, projectId:string) {
 //Post data
 export async function postProject(project:Project) {
   try {
-    return await fetch(projectsUrl, {
+    const response = await fetch(projectsUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(project),
     });
+    const newProject: Project = await response.json();
+    return newProject;
 
   } catch (error) {
     console.error(error);
