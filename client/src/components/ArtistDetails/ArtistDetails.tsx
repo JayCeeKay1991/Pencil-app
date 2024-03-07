@@ -8,11 +8,23 @@ import { Loading } from "../Loading/Loading.js";
 // types
 import Artist from "../../types/Artist";
 
-const initialArtistState = {
-  name: "",
+const initialArtistState =  {
+  _id: "",
+name: "",
+location: "", 
+rate: "",
+skills: [],
+mainSkill: "",
+profileImg: "",
+work: []
 }
 
-export const ArtistDetails: FC  = () => {
+interface ArtistDetailsProps {
+  onSelectProject: () => void;
+}
+
+
+export const ArtistDetails  = (props: ArtistDetailsProps) => {
   const { fullArtists, setFullArtists } = useMainContext();
   const [chosenArtist, setChosenArtist] = useState<Artist>(initialArtistState);
   const [active, setActive] = useState<boolean>(false);
@@ -22,7 +34,7 @@ export const ArtistDetails: FC  = () => {
 
   useEffect(() => {
       const delay = setTimeout(() => {
-        const artist = fullArtists.find((fullArtist: ArtistResponse) => fullArtist._id === id);
+        const artist = fullArtists.find((fullArtist: Artist) => fullArtist._id === id);
         if (artist) {
           setChosenArtist(artist);
         }
@@ -49,7 +61,7 @@ export const ArtistDetails: FC  = () => {
               </div>
               <div className="narrow">
                 <h3>{chosenArtist.name}</h3>
-                <DropDownListSecond />
+                <DropDownListSecond onSelectProject={props.onSelectProject}/>
               </div>
 
               <div className="artist-infos">
