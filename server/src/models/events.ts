@@ -65,4 +65,4 @@ const Projects = mongoose.model("Project", projectSchema);
 const ArtistLikes = mongoose.model("Likes", artistLikes);
 
 export { Artist, Projects, ArtistLikes };
-export type {ArtistType, ProjectsType, ArtistLikesType};
+export type { ArtistType, ProjectsType, ArtistLikesType };

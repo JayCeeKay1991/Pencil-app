@@ -1,11 +1,15 @@
+import Artist from './types/Artist';
+import Project from './types/Project';
+
 const artistsUrl = "http://localhost:3000/artists";
 const projectsUrl = "http://localhost:3000/projects";
+
 
 //Get artists
 export async function fetchArtists() {
   try {
     const response = await fetch(artistsUrl);
-    const jsonData = await response.json();
+    const jsonData:Artist = await response.json();
     return jsonData;
   } catch (error) {
     console.error(error);
@@ -16,7 +20,7 @@ export async function fetchArtists() {
 export async function fetchProjects() {
   try {
     const response = await fetch(projectsUrl);
-    const jsonData = await response.json();
+    const jsonData:Project[] = await response.json();
     // console.log({ jsonData });
     return jsonData;
   } catch (error) {
@@ -25,7 +29,7 @@ export async function fetchProjects() {
 }
 
 //Add artist to list
-export async function addArtist(obj, projectId) {
+export async function addArtist(obj:Artist, projectId:string) {
   try {
     await fetch(projectsUrl + "/" + projectId, {
       method: "PUT",
@@ -41,7 +45,7 @@ export async function addArtist(obj, projectId) {
 }
 
 //Post data
-export async function postProject(project) {
+export async function postProject(project:Project) {
   try {
     await fetch(projectsUrl, {
       method: "POST",
@@ -58,13 +62,12 @@ export async function postProject(project) {
 }
 
 // Get likes
-export async function getLikes(id) {
+export async function getLikes(id:string) {
   try {
     const response = await fetch(
       `http://localhost:3000/projects/artistLikes/${id}`
     );
-    const data = await response.json();
-    // console.log(data)
+    const data = await response.json(); // Likes type
     return data;
   } catch (error) {
     console.error(error);
@@ -72,7 +75,7 @@ export async function getLikes(id) {
 }
 
 // Update likes
-export async function updateLikes(id) {
+export async function updateLikes(id:string) {
   try {
     await fetch(`http://localhost:3000/projects/artistLikes/like/${id}`, {
       method: "PUT",
@@ -86,7 +89,7 @@ export async function updateLikes(id) {
 }
 
 // Update Dislikes
-export async function updateDislikes(id) {
+export async function updateDislikes(id:string) {
   try {
     await fetch(`http://localhost:3000/projects/artistLikes/dislike/${id}`, {
       method: "PUT",

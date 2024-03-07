@@ -1,4 +1,5 @@
 import Artist from "./Artist";
+
 export default interface Project {
     projectName: string;
     projectOwner: string;
