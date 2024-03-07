@@ -22,7 +22,6 @@ export async function fetchProjects() {
   try {
     const response = await fetch(projectsUrl);
     const jsonData:Project[] = await response.json();
-    // console.log({ jsonData });
     return jsonData;
   } catch (error) {
     console.error(error);
@@ -39,7 +38,6 @@ export async function addArtist(obj:Artist, projectId:string) {
       },
       body: JSON.stringify(obj),
     });
-    // console.log(JSON.stringify(obj));
   } catch (error) {
     console.error(error);
   }
@@ -55,8 +53,6 @@ export async function postProject(project:Project) {
       },
       body: JSON.stringify(project),
     });
-    // setNewevent("");
-    // fetchData();
   } catch (error) {
     console.error(error);
   }
