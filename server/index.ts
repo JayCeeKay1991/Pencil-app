@@ -1,11 +1,8 @@
-const express = require("express");
-const app = express();
+import express, { Express } from "express";
 const router = require("./router");
-const cors = require("cors");
+import cors from "cors";
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const app: Express = express();
 
 app.use(express.json());
 app.use(cors());

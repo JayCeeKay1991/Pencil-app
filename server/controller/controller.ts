@@ -1,7 +1,8 @@
 const { Artist, Projects, ArtistLikes } = require("../models/events");
+import { Request, Response, NextFunction } from 'express';
 
 //Get Artists
-exports.getArtists = async (req, res) => {
+exports.getArtists = async (req: Request, res: Response) => {
   try {
     const event = await Artist.find({});
     res.status(200);
