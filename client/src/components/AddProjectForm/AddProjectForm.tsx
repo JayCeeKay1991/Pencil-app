@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, SetStateAction, Dispatch, MouseEvent} from 'react'
+import { ChangeEvent, SetStateAction, Dispatch, MouseEvent} from 'react'
 import { postProject } from "../../ApiService";
 import "./AddProjectForm.css";
 import { useState } from "react";
@@ -11,7 +11,7 @@ interface AddProjectProps {
   setProjects: Dispatch<SetStateAction<Project[]>>;
 }
 
-export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibilty, setProjects }) => {
+export const AddProject = (props:  AddProjectProps ) => {
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newStartDate, setNewStartDate] = useState("");
@@ -39,10 +39,10 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
   }
 
   function hideForm() {
-    if (formVisibility) {
-      setFormVisibilty(false);
+    if (props.formVisibility) {
+      props.setFormVisibilty(false);
     } else {
-      setFormVisibilty(true);
+      props.setFormVisibilty(true);
     }
   }
 
@@ -65,7 +65,7 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
         thumbImage: newThumbnail,
       };
       const savedProject = await postProject(newProject);
-      setProjects((state) => [...state, savedProject]);
+      props.setProjects((state) => [...state, savedProject]);
 
       setNewDescription("");
       setNewName("");
