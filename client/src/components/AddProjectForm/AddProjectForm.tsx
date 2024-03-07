@@ -56,7 +56,7 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
       newThumbnail
     ) {
       const newOwner = "user";
-      const project: Project = {
+      const newProject: Partial<Project> = {
         projectOwner: newOwner,
         description: newDescription,
         projectName: newName,
@@ -64,8 +64,8 @@ export const AddProject: FC<AddProjectProps> = ({ formVisibility, setFormVisibil
         endDate: newEndDate,
         thumbImage: newThumbnail,
       };
-      await postProject(project);
-      setProjects((state) => [...state, project]);
+      const savedProject = await postProject(newProject);
+      setProjects((state) => [...state, savedProject]);
 
       setNewDescription("");
       setNewName("");

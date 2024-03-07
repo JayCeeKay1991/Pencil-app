@@ -5,12 +5,16 @@ import { PageTitle } from "../PageTitle/pageTitle.js";
 import { useState, useEffect, FC } from "react";
 import { DropDownListSecond } from "../DropDownListSecond/DropDownListSecond.js";
 import { Loading } from "../Loading/Loading.js";
-import Artist from "../../types/Artist.js";
 // types
+import Artist from "../../types/Artist";
+
+const initialArtistState = {
+  name: "",
+}
 
 export const ArtistDetails: FC  = () => {
   const { fullArtists, setFullArtists } = useMainContext();
-  const [chosenArtist, setChosenArtist] = useState<Artist | null>(null);
+  const [chosenArtist, setChosenArtist] = useState<Artist>(initialArtistState);
   const [active, setActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();

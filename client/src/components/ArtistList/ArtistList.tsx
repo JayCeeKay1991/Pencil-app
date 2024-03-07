@@ -4,7 +4,6 @@ import { PageTitle } from "../PageTitle/pageTitle.js";
 import { SearchBar } from "../SearchBar/SearchBar.js";
 import { useMainContext } from "../contextComponent.js";
 import { Loading } from "../Loading/Loading.js";
-import { motion, AnimatePresence } from "framer-motion";
 import "./ArtistList.css";
 
 

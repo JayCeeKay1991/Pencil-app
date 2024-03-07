@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import "./DropDownListSecond.css";
 import { fetchProjects } from "../../ApiService.js";
+import Project from "../../types/Project.js";
 
-export function DropDownListSecond ({ onSelectProject }) {
+interface DropDownListProps {
+  onSelectProject: () => void;
+}
+
+
+export const DropDownListSecond: FC<DropDownListProps> = ({ onSelectProject }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
