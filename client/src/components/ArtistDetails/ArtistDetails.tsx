@@ -2,21 +2,23 @@ import "./ArtistDetails.css";
 import { useParams } from "react-router-dom";
 import { useMainContext } from "../contextComponent.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { DropDownListSecond } from "../DropDownListSecond/DropDownListSecond.js";
 import { Loading } from "../Loading/Loading.js";
+import Artist from "../../types/Artist.js";
+// types
 
-export function ArtistDetails() {
+export const ArtistDetails: FC  = () => {
   const { fullArtists, setFullArtists } = useMainContext();
-  const [chosenArtist, setChosenArtist] = useState({});
-  const [active, setActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [chosenArtist, setChosenArtist] = useState<Artist | null>(null);
+  const [active, setActive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();
 
 
   useEffect(() => {
       const delay = setTimeout(() => {
-        const artist = fullArtists.find((fullArtist) => fullArtist._id === id);
+        const artist = fullArtists.find((fullArtist: ArtistResponse) => fullArtist._id === id);
         if (artist) {
           setChosenArtist(artist);
         }
