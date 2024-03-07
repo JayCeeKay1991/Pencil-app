@@ -1,5 +1,9 @@
-const mongoose = require("./index.js");
+import mongoose, { InferSchemaType } from "mongoose";
 const Schema = mongoose.Schema;
+
+type ArtistType = InferSchemaType<typeof artistSchema>;
+type ProjectsType = InferSchemaType<typeof projectSchema>;
+type ArtistLikesType = InferSchemaType<typeof artistLikes>;
 
 const artistSchema = new Schema({
   name: String,
@@ -25,20 +29,16 @@ const projectSchema = new Schema({
   thumbImage: String,
   artists: [
     {
-      type: mongoose.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "ArtistLikes",
     },
   ],
 });
 
-// const usersSchema = new Schema({
-//   name: String,
-//   profileImg: String
-// });
 
 const artistLikes = new Schema({
   artist: {
-    type: mongoose.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "Artist",
   },
   numberOfLikes: {
@@ -50,14 +50,15 @@ const artistLikes = new Schema({
     default: 0,
   },
   project: {
-    type: mongoose.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "Projects",
   },
 });
 
-const Artist = mongoose.model("Artist", artistSchema);
-const Projects = mongoose.model("Projects", projectSchema);
-const ArtistLikes = mongoose.model("ArtistLikes", artistLikes);
-// const Users = mongoose.model("Users", usersSchema);
 
-module.exports = { Artist, Projects, ArtistLikes };
+const Artist = mongoose.model("Artist", artistSchema);
+const Projects = mongoose.model("Project", projectSchema);
+const ArtistLikes = mongoose.model("Likes", artistLikes);
+
+export { Artist, Projects, ArtistLikes };
+export type {ArtistType, ProjectsType, ArtistLikesType};

@@ -2,14 +2,18 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.ts"
+    "compile": "npx tsc",
+    "start": "npm run compile && \"npx tsc --watch\" \"nodemon ./dist/index.js\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/mongoose": "^5.11.97",
+    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "mongodb": "^6.3.0",

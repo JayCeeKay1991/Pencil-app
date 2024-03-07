@@ -1,10 +1,11 @@
-const { Artist, Projects, ArtistLikes } = require("../models/events");
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
+import  { Artist, Projects, ArtistLikes } from "../models/events";
+import { ArtistType, ProjectsType, ArtistLikesType } from "../models/events";
 
 //Get Artists
-exports.getArtists = async (req: Request, res: Response) => {
+exports.getArtists = async (req:Request, res:Response) => {
   try {
-    const event = await Artist.find({});
+    const event:ArtistType[] = await Artist.find({});
     res.status(200);
     res.send(event);
   } catch (error) {
@@ -15,9 +16,9 @@ exports.getArtists = async (req: Request, res: Response) => {
 };
 
 //Post Artist
-exports.addArtist = async (req, res) => {
+exports.addArtist = async (req:Request, res:Response) => {
   try {
-    const event = await Artist.create(req.body);
+    const event:ArtistType = await Artist.create(req.body);
     res.status(201);
     res.send(event);
     console.log(event);
@@ -29,9 +30,9 @@ exports.addArtist = async (req, res) => {
 };
 
 //Get projects
-exports.getProjects = async (req, res) => {
+exports.getProjects = async (req:Request, res:Response) => {
   try {
-    const projects = await Projects.find().populate("artists");
+    const projects:ProjectsType[] = await Projects.find().populate("artists");
     console.log({ projects });
     res.status(200);
     res.send(projects);
@@ -43,10 +44,10 @@ exports.getProjects = async (req, res) => {
 };
 
 //Get one project
-exports.getOneProject = async ({ params }, res) => {
+exports.getOneProject = async (req:Request, res:Response) => {
   try {
-    const { id } = params;
-    const project = await ArtistLikes.find({ project: id });
+    const id = req.params.id;
+    const project:ArtistLikesType[] = await ArtistLikes.find({ project: id });
     res.status(200);
     res.send(project);
   } catch (error) {
@@ -57,9 +58,9 @@ exports.getOneProject = async ({ params }, res) => {
 };
 
 //Post project
-exports.addProject = async (req, res) => {
+exports.addProject = async (req:Request, res:Response) => {
   try {
-    const event = await Projects.create(req.body);
+    const event:ProjectsType = await Projects.create(req.body);
     res.status(201);
     res.send(event);
     console.log(event);
@@ -71,12 +72,12 @@ exports.addProject = async (req, res) => {
 };
 
 //Update projects list
-exports.putProject = async (req, res) => {
+exports.putProject = async (req:Request, res:Response) => {
   try {
-    const projectId = req.params.id;
-    const artist = req.body;
+    const projectId:String = req.params.id;
+    const artist:ArtistType = req.body;
     const filter = { _id: projectId };
-    const artistLikes = await ArtistLikes.create({
+    const artistLikes:ArtistLikesType = await ArtistLikes.create({
       artist,
       project: projectId,
     });
@@ -96,9 +97,9 @@ exports.putProject = async (req, res) => {
 };
 
 //Get projects
-exports.getArtistLikes = async (req, res) => {
+exports.getArtistLikes = async (req:Request, res:Response) => {
   try {
-    const event = await ArtistLikes.find({});
+    const event:ArtistLikesType[] = await ArtistLikes.find({});
     res.status(200);
     res.send(event);
   } catch (error) {
@@ -109,9 +110,9 @@ exports.getArtistLikes = async (req, res) => {
 };
 
 //Update likes
-exports.updateLikes = async ({ params }, res) => {
-  try {
-    const { id } = params;
+exports.updateLikes = async (req:Request, res:Response) => {
+try {
+    const id = req.params.id;
     console.log(id);
     const artist = await ArtistLikes.findOneAndUpdate(
       { _id: id },
@@ -129,9 +130,9 @@ exports.updateLikes = async ({ params }, res) => {
 };
 
 //Update Dislikes
-exports.updateDislikes = async ({ params }, res) => {
+exports.updateDislikes = async (req:Request, res:Response) => {
   try {
-    const { id } = params;
+    const id = req.params.id;
     console.log(id);
     const artist = await ArtistLikes.findOneAndUpdate(
       { _id: id },
