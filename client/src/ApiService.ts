@@ -1,5 +1,6 @@
 import Artist from './types/Artist';
 import Project from './types/Project';
+import ArtistLikes from './types/ArtistLikes';
 
 const artistsUrl = "http://localhost:3000/artists";
 const projectsUrl = "http://localhost:3000/projects";
@@ -67,7 +68,7 @@ export async function getLikes(id:string) {
     const response = await fetch(
       `http://localhost:3000/projects/artistLikes/${id}`
     );
-    const data = await response.json(); // Likes type
+    const data:ArtistLikes = await response.json();
     return data;
   } catch (error) {
     console.error(error);
