@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction, FC } from "react";
 import { useParams } from "react-router-dom";
 import { ProjectDetailsItem } from "../ProjectDetailsItem/ProjectDetailsItem.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
 import "./ProjectDetails.css";
 import { getLikes, fetchProjects } from "../../ApiService.js";
 import { Loading } from "../Loading/Loading.js";
+import ArtistLikes from "../../types/ArtistLikes.js";
 
-export function ProjectDetails() {
+
+
+export const ProjectDetails = (): React.JSX.Element => {
   const [likedArtists, setLikedArtists] = useState([]);
   const [projects, setProjects] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +18,7 @@ export function ProjectDetails() {
   useEffect(() => {
     const delay = setTimeout(async () => {
       try {
-        const likes = await getLikes(id);
+        const likes:ArtistLikes = await getLikes(id);
         setLikedArtists(likes);
         const projects = await fetchProjects();
         const projectTitle = projects.find((project) => project._id === id);

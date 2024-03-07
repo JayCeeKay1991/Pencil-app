@@ -1,9 +1,7 @@
-import { FC } from 'react';
 import { Link } from "react-router-dom";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { IoFolderOpenOutline } from "react-icons/io5";
 import { IoIosMenu } from "react-icons/io";
-
 
 import logo from "../../assets/logo-.svg";
 // import artists from "../../assets/artists.svg";
@@ -12,12 +10,7 @@ import "./Nav.css";
 import { useState } from "react";
 
 
-interface NavProps {
-  isHovered: boolean;
-  setIsHovered: (arg: boolean) => void;
-}
-
-export const Nav: FC<NavProps> = () => {
+export const Nav = (): React.JSX.Element => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
