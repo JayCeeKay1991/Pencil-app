@@ -1,10 +1,10 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect} from "react";
 import "./DropDownList.css";
 import { fetchProjects } from "../../ApiService";
 import Project from "../../types/Project";
 
 interface DropDownListProps {
-  onSelectProject: () => void;
+  onSelectProject: (id: string) => void;
 }
 
 export const DropDownList = (props: DropDownListProps) => {
@@ -26,7 +26,7 @@ export const DropDownList = (props: DropDownListProps) => {
   };
 
   // Handle click
-  const handleProjectSelect = (projectId) => {
+  const handleProjectSelect = (projectId: string) => {
     setSelectedProject(projectId);
     props.onSelectProject(projectId);
     setIsDropdownOpen(false);
