@@ -4,7 +4,6 @@ import "./AddProjectForm.css";
 import { useState } from "react";
 // types
 import Project from '../../types/Project';
-import Artist from '../../types/Artist';
 
 interface AddProjectProps {
   formVisibility: boolean;

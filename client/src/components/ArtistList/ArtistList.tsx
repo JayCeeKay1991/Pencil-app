@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, FC } from "react";
 import { ArtistListItem } from "../ArtistListItem/ArtistListItem.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
 import { SearchBar } from "../SearchBar/SearchBar.js";
@@ -8,7 +8,7 @@ import "./ArtistList.css";
 import Artist from "../../types/Artist";
 
 
-export function ArtistList() {
+export const ArtistList: FC = () => {
   const { fullArtists, setFullArtists } = useMainContext();
   const [artists, setArtists] = useState<Artist[]>([]);
   const [filter, setFilter] = useState<string>("name");
@@ -25,7 +25,6 @@ export function ArtistList() {
 
   function filterSearched(e: ChangeEvent<HTMLInputElement>) {
     const searchValue = e.target.value.toLowerCase();
-
     if (!searchValue) {
       setArtists(fullArtists);
     } else {
