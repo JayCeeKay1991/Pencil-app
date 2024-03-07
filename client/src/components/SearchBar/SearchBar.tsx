@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import { useState, FC, ChangeEvent } from "react";
 import "./SearchBar.css";
 
-export function SearchBar({ filterSearched, filter, setFilter }) {
+interface SearchBarProps {
+  filterSearched: (e: ChangeEvent<HTMLInputElement>) => void;
+  setFilter: (arg: string) => void;
+  filter: string;
+
+}
+
+export const SearchBar: FC<SearchBarProps> = ({ filterSearched, filter, setFilter }) {
   const [isPeopleActive, setIsPeopleActive] = useState(true);
   const [isSkillsActive, setIsSkillsActive] = useState(false);
 
