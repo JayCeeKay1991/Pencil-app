@@ -31,7 +31,7 @@ export async function fetchProjects() {
 //Add artist to list
 export async function addArtist(obj:Artist, projectId:string) {
   try {
-    await fetch(projectsUrl + "/" + projectId, {
+    return await fetch(projectsUrl + "/" + projectId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -46,13 +46,14 @@ export async function addArtist(obj:Artist, projectId:string) {
 //Post data
 export async function postProject(project:Project) {
   try {
-    await fetch(projectsUrl, {
+    return await fetch(projectsUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(project),
     });
+
   } catch (error) {
     console.error(error);
   }
