@@ -1,6 +1,6 @@
 import "./ArtistListItem.css";
 import { addArtist } from "../../ApiService.js";
-import { DropDownList } from "../DropDownList/DropDownList.jsx";
+import { DropDownList } from "../DropDownList/DropDownList.js";
 import { Link } from "react-router-dom";
 
 export function ArtistListItem({ artist }) {

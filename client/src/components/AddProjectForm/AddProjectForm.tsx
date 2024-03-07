@@ -1,8 +1,16 @@
+import { FC } from 'react'
 import { postProject } from "../../ApiService";
 import "./AddProjectForm.css";
 import { useState } from "react";
 
-export function AddProject({ formVisibility, setFormVisibilty, setProjects }) {
+interface AddProjectProps {
+  formVisibility: boolean;
+  setFormVisibilty: () => void;
+  setProjects: () => void;
+
+}
+
+const AddProject: FC({ formVisibility, setFormVisibilty, setProjects }) {
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newStartDate, setNewStartDate] = useState("");
