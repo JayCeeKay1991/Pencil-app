@@ -30,7 +30,7 @@ export const ArtistList = () => {
     } else {
       const searchResult: Artist[] = artists.filter((artist) => {
         for (const value of Object.values(artist)) {
-          if (value.toLowerCase().startsWith(searchValue))
+          if (value.toString().toLowerCase().startsWith(searchValue))
           return artist;
         }
       })
