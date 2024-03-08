@@ -24,7 +24,7 @@ interface ArtistDetailsProps {
 }
 
 
-export const ArtistDetails  = (props: ArtistDetailsProps) => {
+export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
   const { fullArtists, setFullArtists } = useMainContext();
   const [chosenArtist, setChosenArtist] = useState<Artist>(initialArtistState);
   const [active, setActive] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export const ArtistDetails  = (props: ArtistDetailsProps) => {
               </div>
               <div className="narrow">
                 <h3>{chosenArtist.name}</h3>
-                <DropDownListSecond onSelectProject={props.onSelectProject}/>
+                <DropDownListSecond onSelectProject={onSelectProject}/>
               </div>
 
               <div className="artist-infos">
@@ -92,7 +92,7 @@ export const ArtistDetails  = (props: ArtistDetailsProps) => {
                 {chosenArtist.work &&
                   chosenArtist.work.map((item, i) => (
                     <li key={i}>
-                      <article class="story">
+                      <article className="story">
                         <div className="story-img-crop">
                           <img src={item.images}></img>
                         </div>
