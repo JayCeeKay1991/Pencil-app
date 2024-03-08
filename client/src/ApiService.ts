@@ -75,7 +75,7 @@ export async function getLikes(id:string) {
     const response = await fetch(
       `http://localhost:3000/projects/artistLikes/${id}`
     );
-    const data:ArtistLikes = await response.json();
+    const data:ArtistLikes[] = await response.json();
     return data;
   } catch (error) {
     console.error(error);
