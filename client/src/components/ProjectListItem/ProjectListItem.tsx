@@ -1,11 +1,15 @@
 import "./ProjectListItem.css";
 import { Link } from "react-router-dom";
+import Project from "../../types/Project";
 
-export function ProjectListItem({ project }) {
+interface ProjectListItemProps {
+  project:Project;
+}
 
+
+export const ProjectListItem = ({ project }: ProjectListItemProps): React.JSX.Element => {
   //  const artistsAdded = project.artists
   // const numArtists = artistsAdded.length;
-
 
   return (
     <div className="projectThumbWrap">

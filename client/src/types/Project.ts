@@ -6,5 +6,5 @@ export default interface Project {
     startDate: string;
     endDate: string;
     thumbImage: string;
-    // artists: Artist[];
+    artists: string[];
 }
