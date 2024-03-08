@@ -32,12 +32,12 @@ export const addArtist = async (req:Request, res:Response) => {
 //Get projects
 export const getProjects = async (req:Request, res:Response) => {
   try {
-    const projects:ProjectsType[] = await Projects.find().populate("artists");
+    const projects:ProjectsType[] = await Projects.find()/* .populate("artists") */;
     console.log({ projects });
     res.status(200);
     res.send(projects);
   } catch (error) {
-    console.log(error);
+    console.log('error getting projects : ',error);
     res.status(500); // Internal server error
     res.send(error);
   }
