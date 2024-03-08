@@ -52,7 +52,7 @@ export function ProjectList() {
       {formVisibility ? (
         <AddProject
           formVisibility={formVisibility}
-          setFormVisibilty={setFormVisibility}
+          setFormVisibility={setFormVisibility}
           setProjects={setProjects}
         />
       ) : null}

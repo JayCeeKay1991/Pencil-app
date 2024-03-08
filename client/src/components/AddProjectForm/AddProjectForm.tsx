@@ -7,7 +7,7 @@ import Project from '../../types/Project';
 
 interface AddProjectProps {
   formVisibility: boolean;
-  setFormVisibilty: (arg: boolean) => void;
+  setFormVisibility: (arg: boolean) => void;
   setProjects: Dispatch<SetStateAction<Project[]>>;
 }
 
@@ -40,9 +40,9 @@ export const AddProject = (props:  AddProjectProps ) => {
 
   function hideForm() {
     if (props.formVisibility) {
-      props.setFormVisibilty(false);
+      props.setFormVisibility(false);
     } else {
-      props.setFormVisibilty(true);
+      props.setFormVisibility(true);
     }
   }
 
@@ -63,6 +63,7 @@ export const AddProject = (props:  AddProjectProps ) => {
         startDate: newStartDate,
         endDate: newEndDate,
         thumbImage: newThumbnail,
+        artists: []
       };
       const savedProject = await postProject(newProject);
       props.setProjects((state) => [...state, savedProject]);
