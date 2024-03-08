@@ -2,24 +2,29 @@ import "./ArtistListItem.css";
 import { addArtist } from "../../ApiService.js";
 import { DropDownList } from "../DropDownList/DropDownList.js";
 import { Link } from "react-router-dom";
+import Artist from "../../types/Artist";
 
-export function ArtistListItem({ artist }) {
+interface ArtistListItemProps {
+  artist: Artist;
+}
+
+export const ArtistListItem = ({artist}: ArtistListItemProps) => {
 
   //Break firstName lastName
-  function breakName(name) {
+  function breakName(name: string) {
     let splitName = name.split(" ");
     return splitName;
   }
 
   // Add artist
-  async function handleClick(projectId) {
+  async function handleClick(projectId: string) {
      await addArtist(artist, projectId);
    }
 
   return (
     <div className="artistContainer">
       <div className="hover">
-        <DropDownList onSelectProject={handleClick} className="add" />
+        <DropDownList onSelectProject={handleClick} />
           <Link to={`/artistDetails/${artist._id}`}><div className="clickable"></div></Link>
       </div>
 

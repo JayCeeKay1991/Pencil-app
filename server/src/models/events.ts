@@ -63,8 +63,8 @@ const artistLikes = new Schema({
 
 
 const Artist = connection.model("Artist", artistSchema);
-const Projects = connection.model("Project", projectSchema);
+const Project = connection.model("Project", projectSchema);
 const ArtistLikes = connection.model("Likes", artistLikes);
 
-export { Artist, Projects, ArtistLikes };
+export { Artist, Project, ArtistLikes };
 export type { ArtistType, ProjectsType, ArtistLikesType };
