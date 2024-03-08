@@ -8,7 +8,7 @@ import { Loading } from "../Loading/Loading.js";
 import Project from "../../types/Project.js";
 
 export function ProjectList() {
-  const { fullProjects, setFullProjects } = useMainContext();
+  const { fullProjects } = useMainContext();
   const [projects, setProjects] = useState<Project[]>([]);
   const [formVisibility, setFormVisibility] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
