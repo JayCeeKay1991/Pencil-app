@@ -1,15 +1,17 @@
-const myRouter = require("express").Router();
-const controller = require("./controller/controller");
+import { Router } from "express";
+import {getArtists, addArtist, getProjects, addProject, putProject, getOneProject, updateLikes, updateDislikes} from "./controller/controller";
 
-myRouter.get("/artists", controller.getArtists);
-myRouter.post("/artists", controller.addArtist);
+const myRouter = Router();
 
-myRouter.get("/projects", controller.getProjects);
-myRouter.post("/projects", controller.addProject);
-myRouter.put("/projects/:id", controller.putProject);
+myRouter.get("/artists", getArtists);
+myRouter.post("/artists", addArtist);
 
-myRouter.get("/projects/artistLikes/:id", controller.getOneProject);
-myRouter.put("/projects/artistLikes/like/:id", controller.updateLikes);
-myRouter.put("/projects/artistLikes/dislike/:id", controller.updateDislikes);
+myRouter.get("/projects", getProjects);
+myRouter.post("/projects", addProject);
+myRouter.put("/projects/:id", putProject);
 
-module.exports = myRouter;
+myRouter.get("/projects/artistLikes/:id", getOneProject);
+myRouter.put("/projects/artistLikes/like/:id", updateLikes);
+myRouter.put("/projects/artistLikes/dislike/:id", updateDislikes);
+
+export default myRouter;

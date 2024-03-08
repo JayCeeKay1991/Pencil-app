@@ -1,8 +1,6 @@
 import "./Loading.css";
-import React from "react";
 import Lottie from "react-lottie";
 import animationData from "./logo-animation.json";
-import animationTwoData from "./logo-animation 2.json";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Loading() {
