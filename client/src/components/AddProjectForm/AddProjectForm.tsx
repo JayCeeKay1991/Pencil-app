@@ -56,7 +56,7 @@ export const AddProject = (props:  AddProjectProps ) => {
       newThumbnail
     ) {
       const newOwner = "user";
-      const newProject: Partial<Project> = {
+      const newProject: Omit<Project, "_id"> = {
         projectOwner: newOwner,
         description: newDescription,
         projectName: newName,
