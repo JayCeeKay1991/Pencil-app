@@ -5,7 +5,6 @@ import ArtistLikes from './types/ArtistLikes';
 const artistsUrl = "http://localhost:3000/artists";
 const projectsUrl = "http://localhost:3000/projects";
 
-
 //Get artists
 export async function fetchArtists() {
   try {

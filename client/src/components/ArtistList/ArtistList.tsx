@@ -34,9 +34,6 @@ export const ArtistList = () => {
           return artist;
         }
       })
-      // const searched = artists.filter((artist) =>
-      //   artist[filter].toLowerCase().startsWith(searchValue)
-      // );
      setArtists(searchResult);
     }
   }
