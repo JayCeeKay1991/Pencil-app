@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import  { Artist, Projects, ArtistLikes } from "../models/events";
+import  { Artist, Project, ArtistLikes } from "../models/events";
 import { ArtistType, ProjectsType, ArtistLikesType } from "../models/events";
 
 //Get Artists
@@ -32,7 +32,7 @@ export const addArtist = async (req:Request, res:Response) => {
 //Get projects
 export const getProjects = async (req:Request, res:Response) => {
   try {
-    const projects:ProjectsType[] = await Projects.find()/* .populate("artists") */;
+    const projects:ProjectsType[] = await Project.find()/* .populate("artists") */;
     console.log({ projects });
     res.status(200);
     res.send(projects);
@@ -60,7 +60,7 @@ export const getOneProject = async (req:Request, res:Response) => {
 //Post project
 export const addProject = async (req:Request, res:Response) => {
   try {
-    const event:ProjectsType = await Projects.create(req.body);
+    const event:ProjectsType = await Project.create(req.body);
     res.status(201);
     res.send(event);
     console.log(event);
@@ -81,7 +81,7 @@ export const putProject = async (req:Request, res:Response) => {
       artist,
       project: projectId,
     });
-    const updated = await Projects.findByIdAndUpdate(
+    const updated = await Project.findByIdAndUpdate(
       filter,
       { $push: { artists: artistLikes } },
       { new: true }
