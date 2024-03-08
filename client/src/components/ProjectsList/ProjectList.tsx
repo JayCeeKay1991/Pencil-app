@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useMainContext } from "../contextComponent.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
 import { ProjectListItem } from "../ProjectListItem/ProjectListItem.js";
 import { AddProject } from "../AddProjectForm/AddProjectForm.js";
 import "./ProjectList.css";
 import { Loading } from "../Loading/Loading.js";
+import Project from "../../types/Project.js";
 
 export function ProjectList() {
   const { fullProjects, setFullProjects } = useMainContext();
-  const [projects, setProjects] = useState([]);
-  const [formVisibilty, setFormVisibilty] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [formVisibility, setFormVisibility] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
 
   useEffect(() => {
@@ -26,14 +27,14 @@ export function ProjectList() {
 
   // Toggle form visibility
   const showForm = () => {
-    if (!formVisibilty) {
-      setFormVisibilty(true);
+    if (!formVisibility) {
+      setFormVisibility(true);
     }
   };
 
 
   // Sort array
-  function sortProjects(event) {
+  function sortProjects(event: ChangeEvent<HTMLSelectElement>) {
     const value = event.target.value;
     if (value === "start") {
       projects.sort((a, b) => a.startDate.localeCompare(b.startDate));
@@ -48,10 +49,10 @@ export function ProjectList() {
   return (
     <div className="wrapper">
       <PageTitle page="Projects" />
-      {formVisibilty ? (
+      {formVisibility ? (
         <AddProject
-          formVisibilty={formVisibilty}
-          setFormVisibilty={setFormVisibilty}
+          formVisibility={formVisibility}
+          setFormVisibilty={setFormVisibility}
           setProjects={setProjects}
         />
       ) : null}
