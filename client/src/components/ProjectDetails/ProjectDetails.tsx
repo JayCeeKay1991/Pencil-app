@@ -15,7 +15,8 @@ const initialProjectState =  {
   description: "",
   startDate: "",
   endDate: "",
-  thumbImage: ""
+  thumbImage: "",
+  artists: []
 }
 
 
