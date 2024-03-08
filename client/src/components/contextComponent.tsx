@@ -16,7 +16,7 @@ const intialState = {
 
 export const ArtistListContext = createContext<ArtistListContextType>(intialState);
 
-export const ContextComponent: FC<PropsWithChildren>= ({ children }) => {
+export const ContextComponent = ( {children } : PropsWithChildren  ) => {
   const [fullArtists, setFullArtists] = useState<Artist[]>([]);
   const [fullProjects, setFullProjects] = useState<Project[]>([]);
 
