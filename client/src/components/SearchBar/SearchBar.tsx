@@ -8,7 +8,7 @@ interface SearchBarProps {
 
 }
 
-export const SearchBar: FC<SearchBarProps> = ({ filterSearched, filter, setFilter }) {
+export const SearchBar  = ({ filterSearched, filter, setFilter }: SearchBarProps) => {
   const [isPeopleActive, setIsPeopleActive] = useState(true);
   const [isSkillsActive, setIsSkillsActive] = useState(false);
 
