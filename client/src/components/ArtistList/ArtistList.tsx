@@ -9,7 +9,7 @@ import Artist from "../../types/Artist";
 
 
 export const ArtistList = () => {
-  const { fullArtists, setFullArtists } = useMainContext();
+  const { fullArtists } = useMainContext();
   const [artists, setArtists] = useState<Artist[]>([]);
   const [filter, setFilter] = useState<string>("name");
   const [isLoading, setIsLoading] = useState(true)

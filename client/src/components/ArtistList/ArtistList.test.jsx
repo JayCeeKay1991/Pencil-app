@@ -1,13 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ArtistList } from './ArtistList';
+import { artists } from '../../testMocks';
+
+
+vi.mock('../contextComponent', () => ({
+  useMainContext: () => ({
+    fullArtists: artists
+  })
+}));
 
 describe('Artist list', () => {
-  it('renders a list of artists', () => {
+  it('should display artists after loading', async () => {
     render(<ArtistList/>);
-  })
-
-  it('renders the correct number of artists', () => {
-
-  })
+    expect(screen.getByText(artists[0].name)).toBeInTheDocument();
+  });
 })
