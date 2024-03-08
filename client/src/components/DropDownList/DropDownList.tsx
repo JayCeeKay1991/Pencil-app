@@ -7,7 +7,7 @@ interface DropDownListProps {
   onSelectProject: (id: string) => void;
 }
 
-export const DropDownList = (props: DropDownListProps) => {
+export const DropDownList = ({onSelectProject} : DropDownListProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<string>("");
@@ -28,7 +28,7 @@ export const DropDownList = (props: DropDownListProps) => {
   // Handle click
   const handleProjectSelect = (projectId: string) => {
     setSelectedProject(projectId);
-    props.onSelectProject(projectId);
+    onSelectProject(projectId);
     setIsDropdownOpen(false);
   };
 

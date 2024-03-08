@@ -1,5 +1,5 @@
 // contextComponent.js
-import { createContext, useState, useEffect, useContext, FC, PropsWithChildren } from "react";
+import { createContext, useState, useEffect, useContext, PropsWithChildren } from "react";
 import { fetchArtists, fetchProjects } from "../ApiService.ts";
 // types
 import Artist from "../types/Artist";

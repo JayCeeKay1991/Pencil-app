@@ -8,7 +8,7 @@ interface DropDownListProps {
 }
 
 
-export const DropDownListSecond = (props: DropDownListProps) {
+export const DropDownListSecond = ({ onSelectProject }: DropDownListProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<string>("");
@@ -29,7 +29,7 @@ export const DropDownListSecond = (props: DropDownListProps) {
   // Handle click
   const handleProjectSelect = (projectId: string) => {
     setSelectedProject(projectId);
-    props.onSelectProject(projectId);
+    onSelectProject(projectId);
     setIsDropdownOpen(false);
   };
 
