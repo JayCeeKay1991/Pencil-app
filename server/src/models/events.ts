@@ -1,4 +1,6 @@
 import mongoose, { InferSchemaType } from "mongoose";
+import connection from './index';
+
 const Schema = mongoose.Schema;
 
 type ArtistType = InferSchemaType<typeof artistSchema>;
@@ -60,9 +62,9 @@ const artistLikes = new Schema({
 });
 
 
-const Artist = mongoose.model("Artist", artistSchema);
-const Projects = mongoose.model("Project", projectSchema);
-const ArtistLikes = mongoose.model("Likes", artistLikes);
+const Artist = connection.model("Artist", artistSchema);
+const Projects = connection.model("Project", projectSchema);
+const ArtistLikes = connection.model("Likes", artistLikes);
 
 export { Artist, Projects, ArtistLikes };
 export type { ArtistType, ProjectsType, ArtistLikesType };
