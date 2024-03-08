@@ -2,7 +2,7 @@ import "./ArtistDetails.css";
 import { useParams } from "react-router-dom";
 import { useMainContext } from "../contextComponent.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect} from "react";
 import { DropDownListSecond } from "../DropDownListSecond/DropDownListSecond.js";
 import { Loading } from "../Loading/Loading.js";
 // types
@@ -11,7 +11,7 @@ import Artist from "../../types/Artist";
 const initialArtistState =  {
   _id: "",
 name: "",
-location: "", 
+location: "",
 rate: "",
 skills: [],
 mainSkill: "",

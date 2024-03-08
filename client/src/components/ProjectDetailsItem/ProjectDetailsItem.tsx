@@ -4,11 +4,17 @@ import { useMainContext } from "../contextComponent.js";
 import "./ProjectDetailsItem.css";
 import { PiThumbsUpLight } from "react-icons/pi";
 import { PiThumbsDownLight } from "react-icons/pi";
+import Artist from "../../types/Artist.js";
+import ArtistLikes from "../../types/ArtistLikes.js";
+
+interface ProjectDetailsItemProps {
+  artist:ArtistLikes;
+}
 
 
-export function ProjectDetailsItem({ artist }) {
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.JSX.Element => {
+  const [likes, setLikes] = useState<number>(0);
+  const [dislikes, setDislikes] = useState<number>(0);
   const { fullArtists, setFullArtists } = useMainContext();
 
   useEffect(() => {
@@ -19,12 +25,12 @@ export function ProjectDetailsItem({ artist }) {
     fetchAndSet();
   }, []);
 
-  async function updateLikedArtist(id) {
+  async function updateLikedArtist(id:string) {
     await updateLikes(id);
     setLikes((prevLikes) => prevLikes + 1);
   }
 
-  async function updateDislikedArtist(id) {
+  async function updateDislikedArtist(id:string) {
     await updateDislikes(id);
     setDislikes((prevDislikes) => prevDislikes + 1);
   }
@@ -37,10 +43,14 @@ export function ProjectDetailsItem({ artist }) {
     updateLikedArtist(artist._id);
   }
 
-  function getArtistData(artist, property ) {
-   const searched = fullArtists.find((fullArtist) => fullArtist._id === artist);
-   return searched ? searched[property] : "Artist Not Found";
- }
+  function getArtistData<T extends keyof Artist> (artist:string, property:T ) {
+    const searchedArtist = fullArtists.find((fullArtist: Artist) => fullArtist._id === artist);
+    if (!searchedArtist) return 'Artist Not Found';
+    else {
+      if (property in searchedArtist) return searchedArtist[property];
+      else return 'Property not found';
+    }
+  }
 
   return (
     <div className="projectItemWrap">
@@ -71,8 +81,6 @@ export function ProjectDetailsItem({ artist }) {
             <PiThumbsDownLight style={{ color: "black" }} size={25} />
           <p>{dislikes}</p>
           </button>
-
-
       </div>
     </div>
   );
