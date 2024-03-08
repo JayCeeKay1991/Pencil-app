@@ -1,12 +1,12 @@
 import express, { Express } from "express";
-const router = require("./router");
+import myRouter from "./router";
 import cors from "cors";
 
 const app: Express = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(router);
+app.use(myRouter);
 
 // app.listen(3000);
 
