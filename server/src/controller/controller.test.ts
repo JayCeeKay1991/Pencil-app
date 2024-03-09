@@ -4,17 +4,17 @@ import supertest from 'supertest';
 import mongoose from 'mongoose';
 import { Artist, Project } from '../models/events'
 
-const dbName = 'Test';
 
-describe ('Integration Tests', () => {
+describe ('Controller', () => {
     const app  = express();
     app.use(express.json());
     app.use(myRouter);
     const request = supertest(app);
 
     beforeAll (async () => {
-        // const url = `mongodb://127.0.0.1/${dbName}`;
-        // await mongoose.connect(url);
+        await mongoose.connection.close()
+        const url = `mongodb://127.0.0.1/test`;
+        await mongoose.connect(url);
     });
 
     afterEach (async () => {
@@ -32,11 +32,15 @@ describe ('Integration Tests', () => {
            thumbImage: 'testimageurl',
            artists: []
         };
-        const res = await request.post('/projects',)
+        await request.post('/projects',)
         .send(testProject);
 
         const project = await Project.findOne({projectName: 'testproject'})
         await expect (project?.description).toBe('test project description');
+        return;
 
-    });
+    })
+
+    
 })
+
