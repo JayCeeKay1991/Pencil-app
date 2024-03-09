@@ -25,7 +25,7 @@ interface ArtistDetailsProps {
 
 
 export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
-  const { fullArtists, setFullArtists } = useMainContext();
+  const { fullArtists } = useMainContext();
   const [chosenArtist, setChosenArtist] = useState<Artist>(initialArtistState);
   const [active, setActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -52,7 +52,7 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
           <PageTitle page="Artists" />
 
           <div className="artist-content">
-            <div className="artist-profile-details">
+            <div className="artist-profile-details" data-testid="artist-profile-details" >
               <div className="bg-img-crop">
                 <img
                   src={chosenArtist.profileImg}

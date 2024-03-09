@@ -9,6 +9,7 @@ interface AddProjectProps {
   formVisibility: boolean;
   setFormVisibility: (arg: boolean) => void;
   setProjects: Dispatch<SetStateAction<Project[]>>;
+  onSubmit: (data: Partial<Project>) => void;
 }
 
 export const AddProject = (props:  AddProjectProps ) => {
@@ -95,6 +96,7 @@ export const AddProject = (props:  AddProjectProps ) => {
             type="text"
             onChange={handleChangeName}
             placeholder="Write a project name.."
+            data-testid="input-project-name"
           ></input>
         </div>
 
@@ -106,6 +108,7 @@ export const AddProject = (props:  AddProjectProps ) => {
             type="text"
             onChange={handleChangeDescription}
             placeholder="Add a description.."
+            data-testid="input-project-descr"
           ></input>
         </div>
 
@@ -119,6 +122,7 @@ export const AddProject = (props:  AddProjectProps ) => {
               type="datetime-local"
               onChange={handleChangeStartDate}
               placeholder="12/07/2019, 00:00:00"
+              data-testid="input-start"
             ></input>
           </section>
           <section>
@@ -130,6 +134,7 @@ export const AddProject = (props:  AddProjectProps ) => {
               type="datetime-local"
               onChange={handleChangeEndDate}
               placeholder="12/07/2019, 00:00:00"
+              data-testid="input-end"
             ></input>
           </section>
         </div>
@@ -142,10 +147,16 @@ export const AddProject = (props:  AddProjectProps ) => {
             type="text"
             onChange={handleChangeThumbnail}
             placeholder="Paste your link.."
+            data-testid="input-thumbnail"
           ></input>
         </div>
 
-        <button className="create" type="submit" onClick={handleSubmit}>
+        <button
+          className="create"
+          type="submit"
+          onClick={handleSubmit}
+          data-testid="submit-new-project"
+          >
           Create
         </button>
       </form>

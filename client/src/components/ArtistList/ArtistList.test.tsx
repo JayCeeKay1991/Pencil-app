@@ -18,13 +18,13 @@ describe('Artist list renders correctly', () => {
     expect(title).toBeVisible();
   })
 
-  it('the search bar is rendered', () => {
+  it('should render the search bar', () => {
     render(<ArtistList/>);
     const searchBar = screen.queryByPlaceholderText(/search.../i);
     expect(searchBar).toBeVisible();
   })
 
-  it('the people button is selected by default', () => {
+  it('should select the people button by default', () => {
     render(<ArtistList/>);
     const peopleButton = screen.getByTestId('peopleButton');
     expect(peopleButton).toHaveClass("active");
@@ -36,7 +36,7 @@ describe('User actions are processed correctly', async () => {
   const filterSearched = vi.fn();
   const filter = '';
 
-  it('should handle click correctly when filtering by skills', () => {
+  it('should handle click when filtering by skills', () => {
     render(
       <SearchBar
       filterSearched={filterSearched}
@@ -50,7 +50,7 @@ describe('User actions are processed correctly', async () => {
     expect(skillsButton).toHaveClass('active');
     })
 
-    it('search input filters artist list', async () => {
+    it('should handle search input in the text field', async () => {
       render(
         <SearchBar
         filterSearched={filterSearched}
