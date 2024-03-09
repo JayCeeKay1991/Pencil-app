@@ -71,7 +71,7 @@ export function ProjectList() {
       {isLoading ? (
         <Loading />
       ) : (
-        <ul className="list projects-thumbs">
+        <ul className="list projects-thumbs" data-testid="projects-thumbs" >
           {projects.map((project, i) => {
             return <ProjectListItem key={i} project={project} />;
           })}

@@ -9,7 +9,6 @@ interface AddProjectProps {
   formVisibility: boolean;
   setFormVisibility: (arg: boolean) => void;
   setProjects: Dispatch<SetStateAction<Project[]>>;
-  onSubmit: (data: Partial<Project>) => void;
 }
 
 export const AddProject = (props:  AddProjectProps ) => {

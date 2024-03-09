@@ -29,18 +29,12 @@ export const artists = [{
 }]
 
 export const projects = [{
-  "_id": {
-    "$oid": "65e7aa44a9b51e17a5ca353b"
-  },
+  "_id": "65e7aa44a9b51e17a5ca353b",
   "projectOwner": "user",
   "description": "apple advert",
   "projectName": "Apple TV commercial",
-  "startDate": {
-    "$date": "2024-03-20T23:26:00.000Z"
-  },
-  "endDate": {
-    "$date": "2024-03-19T23:26:00.000Z"
-  },
+  "startDate": "2024-03-20T23:26:00.000Z",
+  "endDate": "2024-03-19T23:26:00.000Z",
   "thumbImage": "https://i.pinimg.com/564x/40/3b/9a/403b9ad670ccd9a572517da4ee6d6b24.jpg",
   "artists": [],
   "__v": 0
