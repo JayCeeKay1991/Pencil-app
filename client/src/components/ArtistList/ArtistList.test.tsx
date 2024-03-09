@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ArtistList } from './ArtistList';
-import { artists } from '../../testMocks';
+import { artists } from '../../test/testMocks';
 
 
 vi.mock('../contextComponent', () => ({
@@ -11,8 +11,9 @@ vi.mock('../contextComponent', () => ({
 }));
 
 describe('Artist list', () => {
-  it('should display artists after loading', async () => {
+  it('should display artists', async () => {
     render(<ArtistList/>);
-    expect(screen.getByText(artists[0].name)).toBeInTheDocument();
+    const image = screen.getByText(artists[0].profileImg)
+    expect(image).toBeVisible();
   });
 })
