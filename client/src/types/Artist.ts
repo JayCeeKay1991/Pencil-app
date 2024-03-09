@@ -1,6 +1,7 @@
 interface Work {
     description: string[],
-    images: string
+    images: string,
+    _id: string
 }
 
 export default interface Artist {

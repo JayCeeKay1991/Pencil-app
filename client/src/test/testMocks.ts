@@ -1,7 +1,5 @@
 export const artists = [{
-  "_id": {
-    "$oid": "65e4b2b45b642b1a0624c2e3"
-  },
+  "_id": "65e4b2b45b642b1a0624c2e3",
   "name": "Liam Miller",
   "location": "Seoul",
   "rate": "₩700000/pd",
@@ -17,23 +15,15 @@ export const artists = [{
       "description": [
         "Translated documents for a multinational corporation in 2023"
       ],
-      "images": [
-        "https://i.pinimg.com/564x/1c/00/c2/1c00c2b6a6caa78e9db31e195e53ac0b.jpg"
-      ],
-      "_id": {
-        "$oid": "65e4b2b45b642b1a0624c2e4"
-      }
+      "images": "https://i.pinimg.com/564x/1c/00/c2/1c00c2b6a6caa78e9db31e195e53ac0b.jpg",
+      "_id": "65e4b2b45b642b1a0624c2e4"
     },
     {
       "description": [
         "Interpreted for diplomatic meetings between international leaders in 2022"
       ],
-      "images": [
-        "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-      ],
-      "_id": {
-        "$oid": "65e4b2b45b642b1a0624c2e5"
-      }
+      "images": "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "_id": "65e4b2b45b642b1a0624c2e5"
     }
   ]
 }]

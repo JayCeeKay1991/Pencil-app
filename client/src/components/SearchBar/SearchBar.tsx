@@ -26,7 +26,7 @@ export const SearchBar  = ({ filterSearched, filter, setFilter }: SearchBarProps
 
   return (
     <div className="searchWrap">
-      <div className="searchBar">
+      <div className="searchBar" data-testid="searchBar" >
         <input
           id="true"
           onChange={filterSearched}
@@ -35,12 +35,14 @@ export const SearchBar  = ({ filterSearched, filter, setFilter }: SearchBarProps
           placeholder="Search..."
         />
         <button
+          data-testid="peopleButton"
           onClick={changeFilterPeople}
           className={isPeopleActive ? "active" : ""}
         >
           People
         </button>
         <button
+        data-testid="skillsButton"
           onClick={changeFilterSkills}
           className={isSkillsActive ? "active" : ""}
         >
