@@ -2,7 +2,7 @@ import express from 'express';
 import myRouter from '../router';
 import supertest, { Response, Request } from 'supertest';
 import mongoose from 'mongoose';
-import { Artist, Project } from '../models/events'
+import { Artist, Project, ArtistLikes } from '../models/events'
 
 // mocks
 
@@ -131,14 +131,14 @@ describe('Controller', () => {
         await request.post('/projects')
             .send(testProject);
 
-            await request.post('/projects')
+        await request.post('/projects')
             .send(secondTestProject)
-    
+
         await request.get('/projects')
             .expect(200)
             .expect((res: Response) => {
                 expect(res.body.length).toEqual(2);
-            })  
+            })
     });
 
     it('should retrieve all artists', async () => {
@@ -147,12 +147,12 @@ describe('Controller', () => {
 
         await request.post('/artists')
             .send(secondTestArtist)
-    
+
         await request.get('/artists')
             .expect(200)
             .expect((res: Response) => {
                 expect(res.body.length).toEqual(2);
-            })  
+            })
     });
 
     it('should update add an artist to a project', async () => {
@@ -165,7 +165,7 @@ describe('Controller', () => {
         try {
             const project = await Project.findOne({ projectName: testProject.projectName })
             const artist = await Artist.findOne({ name: testArtist.name })
-            if(project && artist) {
+            if (project && artist) {
                 await request.put(`/projects/${project.id}`)
                     .send(artist)
                     .expect(201)
@@ -177,7 +177,7 @@ describe('Controller', () => {
         } catch (error) {
             console.error('Something went wrong', error)
         }
-      
+
     })
 
 })
