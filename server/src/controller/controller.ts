@@ -63,7 +63,6 @@ export const addProject = async (req:Request, res:Response) => {
     const event:ProjectsType = await Project.create(req.body);
     res.status(201);
     res.send(event);
-    console.log(event);
   } catch (error) {
     console.log(error);
     res.status(500);
