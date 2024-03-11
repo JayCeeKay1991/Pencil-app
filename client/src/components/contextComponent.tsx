@@ -1,6 +1,7 @@
 // contextComponent.js
 import { createContext, useState, useEffect, useContext, PropsWithChildren } from "react";
-import { fetchArtists, fetchProjects } from "../ApiService.ts";
+import { getAllArtists } from "../services/ArtistApi.ts";
+import { getAllProjects } from "../services/ProjectApi.ts";
 // types
 import Artist from "../types/Artist";
 import Project from "../types/Project";
@@ -23,13 +24,13 @@ export const ContextComponent = ( {children } : PropsWithChildren  ) => {
   useEffect(() => {
     async function fetchAndSet() {
       try {
-        const artistData = await fetchArtists();
+        const artistData = await getAllArtists();
         setFullArtists(artistData);
       } catch (error) {
         console.error("Error fetching artists:", error);
       }
       try {
-        const projectData = await fetchProjects();
+        const projectData = await getAllProjects();
         setFullProjects(projectData);
       } catch (error) {
         console.error("Error fetching projects:", error);
