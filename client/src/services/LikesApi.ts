@@ -9,11 +9,11 @@ export const getLikes = async ( projectId: string ) => {
 
 // update artist likes PUT
 export const updateLikes = async ( artistId: string ) => {
-  return await apiClient<ArtistLikes>(`/projects/artistLikes/like/${artistId}`)
+  return await apiClient<ArtistLikes>(`projects/artistLikes/like/${artistId}`)
 }
 
 // update artist dislikes PUT
 export const updateDislikes = async ( artistId: string ) => {
-  return await apiClient<ArtistLikes>(`/projects/artistLikes/dislike/${artistId}`)
+  return await apiClient<ArtistLikes>(`projects/artistLikes/dislike/${artistId}`)
 }
 

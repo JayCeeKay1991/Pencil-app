@@ -5,17 +5,17 @@ import { apiClient } from "./ApiClient";
 
 // Get all projects GET
 export const getAllProjects =  async () => {
-    return await apiClient<Project[]>('/projects')
+    return await apiClient<Project[]>('projects')
 }
 
 // Add new projects POST
 export const addNewProject = async ( projectData: Omit<Project, "_id">) => {
-    return await apiClient<Project>('/projects', 'POST', projectData)
+    return await apiClient<Project>('projects', 'POST', projectData)
 }
 
 // Add new artist to existing project PUT
 export const addArtistToProject = async ( artistData: Omit<Artist, "_id">) => {
-    return await apiClient<Project>(`/projects`, 'PUT', artistData)
+    return await apiClient<Project>(`projects`, 'PUT', artistData)
 }
 
 

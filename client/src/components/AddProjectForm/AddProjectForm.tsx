@@ -1,5 +1,5 @@
 import { ChangeEvent, SetStateAction, Dispatch, MouseEvent} from 'react'
-import { postProject } from "../../ApiService";
+import { addNewProject } from '../../services/ProjectApi';
 import "./AddProjectForm.css";
 import { useState } from "react";
 // types
@@ -65,7 +65,7 @@ export const AddProject = (props:  AddProjectProps ) => {
         thumbImage: newThumbnail,
         artists: []
       };
-      const savedProject = await postProject(newProject);
+      const savedProject = await addNewProject(newProject);
       props.setProjects((state) => [...state, savedProject]);
 
       setNewDescription("");
