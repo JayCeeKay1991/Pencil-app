@@ -1,7 +1,25 @@
 import { Request, Response } from 'express';
-import  { Artist, Project, ArtistLikes } from "../models/events";
+import  { Artist, Project, ArtistLikes, User } from "../models/events";
 import { ArtistType, ProjectsType, ArtistLikesType } from "../models/events";
+import bcrypt from 'bcrypt';
 
+// USERS
+
+// Login
+
+exports.login = async (req:Request, res:Response) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+    const validatedPass = await bcrypt.compare(password, user.password);
+    if (!validatedPass) throw new Error();
+    res.status(200)
+    res.send(user);
+  } catch (error) {
+    res.status(401);
+    res.send({ error: '401', message: 'Username or password is incorrect' });
+  }
+};
 
 // ARTISTS
 
@@ -65,7 +83,7 @@ export const addProject = async (req:Request, res:Response) => {
 
 // ARTIST LIKES
 
-//Get one project's Artist Likes 
+//Get one project's Artist Likes
 export const getOneProject = async (req:Request, res:Response) => {
   try {
     const id = req.params.id;
