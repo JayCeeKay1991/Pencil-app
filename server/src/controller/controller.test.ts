@@ -155,7 +155,7 @@ describe('Controller', () => {
             })
     });
 
-    it('should update add an artist to a project', async () => {
+    it('should add an artist to a project', async () => {
         await request.post('/projects')
             .send(testProject);
 

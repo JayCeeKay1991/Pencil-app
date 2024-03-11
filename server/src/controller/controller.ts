@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import  { Artist, Project, ArtistLikes } from "../models/events";
 import { ArtistType, ProjectsType, ArtistLikesType } from "../models/events";
 
+
+// ARTISTS
+
 //Get Artists
 export const getArtists = async (req:Request, res:Response) => {
   try {
@@ -18,10 +21,9 @@ export const getArtists = async (req:Request, res:Response) => {
 //Post Artist
 export const addArtist = async (req:Request, res:Response) => {
   try {
-    const event:ArtistType = await Artist.create(req.body);
+    const newArtist:ArtistType = await Artist.create(req.body);
     res.status(201);
-    res.send(event);
-    console.log(event);
+    res.send(newArtist);
   } catch (error) {
     console.log(error);
     res.status(500); // Internal server error
@@ -29,7 +31,10 @@ export const addArtist = async (req:Request, res:Response) => {
   }
 };
 
-//Get projects
+
+// PROJECTS
+
+//Get all projects
 export const getProjects = async (req:Request, res:Response) => {
   try {
     const projects:ProjectsType[] = await Project.find()/* .populate("artists") */;
@@ -38,20 +43,6 @@ export const getProjects = async (req:Request, res:Response) => {
     res.send(projects);
   } catch (error) {
     console.log('error getting projects : ',error);
-    res.status(500); // Internal server error
-    res.send(error);
-  }
-};
-
-//Get one project
-export const getOneProject = async (req:Request, res:Response) => {
-  try {
-    const id = req.params.id;
-    const project:ArtistLikesType[] = await ArtistLikes.find({ project: id });
-    res.status(200);
-    res.send(project);
-  } catch (error) {
-    console.log(error);
     res.status(500); // Internal server error
     res.send(error);
   }
@@ -70,7 +61,25 @@ export const addProject = async (req:Request, res:Response) => {
   }
 };
 
-//Update projects list
+
+
+// ARTIST LIKES
+
+//Get one project's Artist Likes
+export const getOneProject = async (req:Request, res:Response) => {
+  try {
+    const id = req.params.id;
+    const project:ArtistLikesType[] = await ArtistLikes.find({ project: id });
+    res.status(200);
+    res.send(project);
+  } catch (error) {
+    console.log(error);
+    res.status(500); // Internal server error
+    res.send(error);
+  }
+};
+
+// Add artist and artist likes to project
 export const putProject = async (req:Request, res:Response) => {
   try {
     const projectId:String = req.params.id;
@@ -87,7 +96,6 @@ export const putProject = async (req:Request, res:Response) => {
     );
     res.status(201);
     res.send(updated);
-    console.log(updated);
   } catch (error) {
     console.log(error);
     res.status(500);
@@ -95,7 +103,7 @@ export const putProject = async (req:Request, res:Response) => {
   }
 };
 
-//Get projects
+//Get projects artist likes
 export const getArtistLikes = async (req:Request, res:Response) => {
   try {
     const event:ArtistLikesType[] = await ArtistLikes.find({});
@@ -120,7 +128,6 @@ try {
     );
     res.status(201);
     res.send(artist);
-    console.log(artist);
   } catch (error) {
     console.log(error);
     res.status(500);
@@ -140,7 +147,6 @@ export const updateDislikes = async (req:Request, res:Response) => {
     );
     res.status(201);
     res.send(artist);
-    console.log(artist);
   } catch (error) {
     console.log(error);
     res.status(500);
