@@ -5,6 +5,7 @@ import "./ProjectDetailsItem.css";
 import { PiThumbsUpLight } from "react-icons/pi";
 import { PiThumbsDownLight } from "react-icons/pi";
 import { GoCommentDiscussion } from "react-icons/go";
+import { ArtistComments } from "../ArtistComments/ArtistComments.js";
 
 import Artist from "../../types/Artist.js";
 import ArtistLikes from "../../types/ArtistLikes.js";
@@ -17,6 +18,7 @@ interface ProjectDetailsItemProps {
 export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.JSX.Element => {
   const [likes, setLikes] = useState<number>(0);
   const [dislikes, setDislikes] = useState<number>(0);
+  const [showComments, setShowComments] = useState<boolean>(false);
   const { fullArtists, setFullArtists } = useMainContext();
 
   useEffect(() => {
@@ -45,6 +47,12 @@ export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.J
     updateLikedArtist(artist._id);
   }
 
+  function toggleComments() {
+    setShowComments(!showComments);
+  }
+
+
+
   function getArtistData<T extends keyof Artist> (artist:string, property:T ) {
     const searchedArtist = fullArtists.find((fullArtist: Artist) => fullArtist._id === artist);
     if (!searchedArtist) return 'Artist Not Found';
@@ -55,6 +63,7 @@ export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.J
   }
 
   return (
+    <div className="projectItemWithComments" >
     <div className="projectItemWrap">
       <div className="check">
         <div className="img-crop">
@@ -82,12 +91,15 @@ export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.J
             <PiThumbsDownLight style={{ color: "black" }} size={25} />
           <p>{dislikes}</p>
           </button>
-          <button className="like comments">
+          <button onClick={toggleComments} className="like comments">
             <GoCommentDiscussion  style={{ color: "black" }} size={25} />
             <p>3</p>
           </button>
-
       </div>
     </div>
+    {
+      showComments ? <ArtistComments></ArtistComments> : <></>
+    }
+      </div>
   );
 }

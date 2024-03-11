@@ -1,5 +1,9 @@
 /* || Project details styles */
 
+.projectItemWithComments {
+    position: relative;
+}
+
 .projectItemWrap {
     width: 100%;
     height: 100px;
