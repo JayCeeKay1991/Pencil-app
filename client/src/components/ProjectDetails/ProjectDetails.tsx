@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { ProjectDetailsItem } from "../ProjectDetailsItem/ProjectDetailsItem.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
 import "./ProjectDetails.css";
-import { getLikes, fetchProjects } from "../../ApiService.js";
+import { getAllProjects } from "../../services/ProjectApi.js";
+import { getLikes } from "../../services/LikesApi.js";
 import { Loading } from "../Loading/Loading.js";
 import ArtistLikes from "../../types/ArtistLikes.js";
 import Project from "../../types/Project.js";
@@ -19,9 +20,17 @@ const initialProjectState =  {
   artists: []
 }
 
+const initialLikesState = {
+  _id: "",
+  artist: "",
+  numberOfLikes: 0,
+  numberOfDislikes: 0,
+  project: ""
+}
+
 
 export const ProjectDetails = (): React.JSX.Element => {
-  const [likedArtists, setLikedArtists] = useState<ArtistLikes[]>([]);
+  const [likedArtists, setLikedArtists] = useState<ArtistLikes>(initialLikesState);
   const [projects, setProjects] = useState<Project>(initialProjectState)
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();
@@ -31,7 +40,7 @@ export const ProjectDetails = (): React.JSX.Element => {
       try {
         const likes = await getLikes(id!);
         setLikedArtists(likes);
-        const projects:Project[] = await fetchProjects();
+        const projects:Project[] = await getAllProjects();
         const projectTitle = projects.find((project:Project) => project._id === id);
         if (projectTitle) {
           setProjects(projectTitle);

@@ -1,4 +1,4 @@
-import { useState, FC, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import "./SearchBar.css";
 
 interface SearchBarProps {

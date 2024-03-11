@@ -1,5 +1,5 @@
 import "./ArtistListItem.css";
-import { addArtist } from "../../ApiService.js";
+import { addArtistToProject } from "../../services/ProjectApi.js";
 import { DropDownList } from "../DropDownList/DropDownList.js";
 import { Link } from "react-router-dom";
 import Artist from "../../types/Artist";
@@ -18,7 +18,7 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
 
   // Add artist
   async function handleClick(projectId: string) {
-     await addArtist(artist, projectId);
+     await addArtistToProject(artist, projectId);
    }
 
   return (

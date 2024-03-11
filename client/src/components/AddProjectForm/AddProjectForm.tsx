@@ -11,7 +11,7 @@ interface AddProjectProps {
   setProjects: Dispatch<SetStateAction<Project[]>>;
 }
 
-export const AddProject = (props:  AddProjectProps ) => {
+export const AddProject = ({setFormVisibility, setProjects, formVisibility}:  AddProjectProps ) => {
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newStartDate, setNewStartDate] = useState("");
@@ -39,10 +39,10 @@ export const AddProject = (props:  AddProjectProps ) => {
   }
 
   function hideForm() {
-    if (props.formVisibility) {
-      props.setFormVisibility(false);
+    if (formVisibility) {
+      setFormVisibility(false);
     } else {
-      props.setFormVisibility(true);
+      setFormVisibility(true);
     }
   }
 
@@ -66,7 +66,7 @@ export const AddProject = (props:  AddProjectProps ) => {
         artists: []
       };
       const savedProject = await addNewProject(newProject);
-      props.setProjects((state) => [...state, savedProject]);
+      setProjects((state) => [...state, savedProject]);
 
       setNewDescription("");
       setNewName("");

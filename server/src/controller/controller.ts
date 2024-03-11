@@ -65,7 +65,7 @@ export const addProject = async (req:Request, res:Response) => {
 
 // ARTIST LIKES
 
-//Get one project's Artist Likes
+//Get one project's Artist Likes 
 export const getOneProject = async (req:Request, res:Response) => {
   try {
     const id = req.params.id;
@@ -79,7 +79,7 @@ export const getOneProject = async (req:Request, res:Response) => {
   }
 };
 
-// Add artist and artist likes to project
+// Add artist and artist likes to project PUT
 export const putProject = async (req:Request, res:Response) => {
   try {
     const projectId:String = req.params.id;

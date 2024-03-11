@@ -4,11 +4,14 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   roots: ['<rootDir>/src'], // Assuming your TypeScript files are in a src directory
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  testMatch: ['**/*.test.ts', '**/*.spec.ts'], // Match test files with .test.ts or .spec.ts extensions
+  moduleFileExtensions: ['ts', 'js', 'json', 'node'],
+  testMatch: ['**/*.test.ts'], // Match test files with .test.ts
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest', // Transform TypeScript files using ts-jest
+    '^.+\\.(ts)$': 'ts-jest', // Transform TypeScript files using ts-jest
   },
+  globals: { 'ts-jest': {
+    tsconfig: 'tsconfig.test.json'
+  }}
   // Optional: You can add other configurations as needed
 };
 

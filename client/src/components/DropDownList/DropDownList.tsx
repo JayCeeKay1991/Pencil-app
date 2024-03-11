@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
 import "./DropDownList.css";
-import { fetchProjects } from "../../ApiService";
+import { getAllProjects } from "../../services/ProjectApi";
 import Project from "../../types/Project";
 
 interface DropDownListProps {
@@ -14,7 +14,7 @@ export const DropDownList = ({onSelectProject} : DropDownListProps) => {
 
   useEffect(() => {
     async function fetchAndSet() {
-      const data = await fetchProjects();
+      const data = await getAllProjects();
       setProjects(data);
     }
     fetchAndSet();

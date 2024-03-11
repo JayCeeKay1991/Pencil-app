@@ -4,6 +4,8 @@ import supertest, { Response, Request } from 'supertest';
 import mongoose from 'mongoose';
 import { Artist, Project, ArtistLikes } from '../models/events'
 
+// IGNORE THE TS ERRORS ON JEST FUNCTIONS
+
 // mocks
 
 const testProject = {
@@ -104,6 +106,10 @@ describe('Controller', () => {
     afterEach(async () => {
         await Project.deleteMany();
         await Artist.deleteMany();
+    })
+
+    afterAll(async () => {
+        await mongoose.connection.close()
     })
 
     it('should save a new project to the database', async () => {
