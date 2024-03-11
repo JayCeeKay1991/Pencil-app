@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Project from "../../types/Project";
 
 interface ProjectListItemProps {
-  project:Project;
+  project: Project;
 }
 
 

@@ -1,4 +1,4 @@
-import { updateLikes, updateDislikes } from "../../ApiService.js";
+import { updateLikes, updateDislikes } from "../../services/LikesApi.js";
 import { useState, useEffect } from "react";
 import { useMainContext } from "../contextComponent.js";
 import "./ProjectDetailsItem.css";
