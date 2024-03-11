@@ -20,17 +20,8 @@ const initialProjectState =  {
   artists: []
 }
 
-const initialLikesState = {
-  _id: "",
-  artist: "",
-  numberOfLikes: 0,
-  numberOfDislikes: 0,
-  project: ""
-}
-
-
 export const ProjectDetails = (): React.JSX.Element => {
-  const [likedArtists, setLikedArtists] = useState<ArtistLikes>(initialLikesState);
+  const [likedArtists, setLikedArtists] = useState<ArtistLikes[]>([]);
   const [projects, setProjects] = useState<Project>(initialProjectState)
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();

@@ -4,7 +4,7 @@ import { apiClient } from "./ApiClient";
 
 // Get one projects artist likes GET
 export const getLikes = async ( projectId: string ) => {
-  return await apiClient<ArtistLikes>(`projects/artistLikes/${projectId}`)
+  return await apiClient<ArtistLikes[]>(`projects/artistLikes/${projectId}`)
 }
 
 // update artist likes PUT
