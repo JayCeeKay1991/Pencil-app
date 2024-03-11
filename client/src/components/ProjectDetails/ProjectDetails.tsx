@@ -57,7 +57,7 @@ export const ProjectDetails = (): React.JSX.Element => {
           <div className="titles">
             <p>CHOSEN ARTISTS</p>
             <p>RATE</p>
-            <p>VOTES</p>
+            <p>VOTES & COMMENTS</p>
           </div>
 
           <ul className="project-details-List">

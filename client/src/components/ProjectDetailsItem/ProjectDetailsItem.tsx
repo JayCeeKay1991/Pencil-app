@@ -4,6 +4,8 @@ import { useMainContext } from "../contextComponent.js";
 import "./ProjectDetailsItem.css";
 import { PiThumbsUpLight } from "react-icons/pi";
 import { PiThumbsDownLight } from "react-icons/pi";
+import { GoCommentDiscussion } from "react-icons/go";
+
 import Artist from "../../types/Artist.js";
 import ArtistLikes from "../../types/ArtistLikes.js";
 
@@ -76,11 +78,15 @@ export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.J
           </button>
 
         <hr />
-
           <button onClick={handleDislikes} className="like">
             <PiThumbsDownLight style={{ color: "black" }} size={25} />
           <p>{dislikes}</p>
           </button>
+          <button className="like comments">
+            <GoCommentDiscussion  style={{ color: "black" }} size={25} />
+            <p>3</p>
+          </button>
+
       </div>
     </div>
   );

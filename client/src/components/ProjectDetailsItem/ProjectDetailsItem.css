@@ -9,8 +9,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-left:40px;
-    padding-right: 140px;
+    padding-left: 40px;
+    padding-right: 120px;
     background: var(--light-grey);
 }
 
