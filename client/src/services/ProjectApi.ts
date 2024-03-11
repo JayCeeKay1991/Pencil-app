@@ -14,8 +14,8 @@ export const addNewProject = async ( projectData: Omit<Project, "_id">) => {
 }
 
 // Add new artist to existing project PUT
-export const addArtistToProject = async ( artistData: Omit<Artist, "_id">) => {
-    return await apiClient<Project>(`projects`, 'PUT', artistData)
+export const addArtistToProject = async ( artistData: Omit<Artist, "_id">, projectId: string ) => {
+    return await apiClient<Project>(`projects/${projectId}`, 'PUT', artistData)
 }
 
 
