@@ -11,13 +11,13 @@ import { ArtistListContextType } from "../types/ArtistListContextType.ts";
 const intialState = {
   fullArtists: [],
   fullProjects: [],
-  setFullArtists:  () => [],
-  setFullProjects:  () => [],
+  setFullArtists: () => [],
+  setFullProjects: () => [],
 }
 
 export const ArtistListContext = createContext<ArtistListContextType>(intialState);
 
-export const ContextComponent = ( {children } : PropsWithChildren  ) => {
+export const ContextComponent = ({ children }: PropsWithChildren) => {
   const [fullArtists, setFullArtists] = useState<Artist[]>([]);
   const [fullProjects, setFullProjects] = useState<Project[]>([]);
 
