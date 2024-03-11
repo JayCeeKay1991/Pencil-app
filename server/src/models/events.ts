@@ -3,6 +3,7 @@ import connection from './index';
 
 const Schema = mongoose.Schema;
 
+type UserType = InferSchemaType<typeof userSchema>;
 type ArtistType = InferSchemaType<typeof artistSchema>;
 type ProjectsType = InferSchemaType<typeof projectSchema>;
 type ArtistLikesType = InferSchemaType<typeof artistLikes>;
@@ -61,10 +62,17 @@ const artistLikes = new Schema({
   },
 });
 
+const userSchema = new Schema({
+  userName: String,
+  email: String,
+  password: String
+})
+
 
 const Artist = connection.model("Artist", artistSchema);
 const Project = connection.model("Project", projectSchema);
 const ArtistLikes = connection.model("Likes", artistLikes);
+const User = connection.model("Users", userSchema);
 
-export { Artist, Project, ArtistLikes };
-export type { ArtistType, ProjectsType, ArtistLikesType };
+export { Artist, Project, ArtistLikes, User };
+export type { ArtistType, ProjectsType, ArtistLikesType, UserType};

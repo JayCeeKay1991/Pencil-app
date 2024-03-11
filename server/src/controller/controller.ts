@@ -11,15 +11,23 @@ exports.login = async (req:Request, res:Response) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    const validatedPass = await bcrypt.compare(password, user.password);
-    if (!validatedPass) throw new Error();
-    res.status(200)
-    res.send(user);
+    if (user && user.email && user.password) {
+      const validatedPass = await bcrypt.compare(password, user.password)
+      if (!validatedPass) {
+        res.status(300)
+        res.send({ error: '401', message: 'Username or password is incorrect' });
+      };
+      res.status(200)
+      res.send(user);
+    } else {
+      throw new Error('No user found with this email address.');
+    }
   } catch (error) {
-    res.status(401);
-    res.send({ error: '401', message: 'Username or password is incorrect' });
+    res.status(500);
+    res.send({ error: '500', message: 'Internal server error.' });
   }
 };
+
 
 // ARTISTS
 
