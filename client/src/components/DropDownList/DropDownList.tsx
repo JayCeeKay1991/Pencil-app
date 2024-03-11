@@ -15,6 +15,7 @@ export const DropDownList = ({onSelectProject} : DropDownListProps) => {
   useEffect(() => {
     async function fetchAndSet() {
       const data = await getAllProjects();
+      console.log('project data', data);
       setProjects(data);
     }
     fetchAndSet();

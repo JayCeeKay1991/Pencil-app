@@ -1,5 +1,5 @@
 import ArtistLikes from "../types/ArtistLikes";
-import { apiClient } from "./ApiClient";}
+import { apiClient } from "./ApiClient";
 
 
 // Get one projects artist likes GET
