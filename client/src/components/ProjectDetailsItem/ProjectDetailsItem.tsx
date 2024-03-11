@@ -93,12 +93,12 @@ export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.J
           </button>
           <button onClick={toggleComments} className="like comments">
             <GoCommentDiscussion  style={{ color: "black" }} size={25} />
-            <p>3</p>
+            <p>{artist.comments !== undefined ? artist.comments.length : 0}</p>
           </button>
       </div>
     </div>
     {
-      showComments ? <ArtistComments></ArtistComments> : <></>
+      showComments ? <ArtistComments comments={artist.comments} ></ArtistComments> : <></>
     }
       </div>
   );

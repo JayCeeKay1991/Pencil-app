@@ -6,18 +6,21 @@ import { getAllProjects } from "../services/ProjectApi.ts";
 import Artist from "../types/Artist";
 import Project from "../types/Project";
 import { ArtistListContextType } from "../types/ArtistListContextType.ts";
+import User from "../types/User.ts";
 
-
-const intialState = {
+const initialState:ArtistListContextType = {
+  user: null,
   fullArtists: [],
   fullProjects: [],
   setFullArtists: () => [],
   setFullProjects: () => [],
+  setUser: () => null
 }
 
-export const ArtistListContext = createContext<ArtistListContextType>(intialState);
+export const ArtistListContext = createContext<ArtistListContextType>(initialState);
 
 export const ContextComponent = ({ children }: PropsWithChildren) => {
+  const [user, setUser] = useState<User | null>(null);
   const [fullArtists, setFullArtists] = useState<Artist[]>([]);
   const [fullProjects, setFullProjects] = useState<Project[]>([]);
 
@@ -41,7 +44,7 @@ export const ContextComponent = ({ children }: PropsWithChildren) => {
 
 
   return (
-    <ArtistListContext.Provider value={{ fullArtists, setFullArtists, fullProjects, setFullProjects }}>
+    <ArtistListContext.Provider value={{ user, setUser, fullArtists, setFullArtists, fullProjects, setFullProjects }}>
       {children}
     </ArtistListContext.Provider>
   );
