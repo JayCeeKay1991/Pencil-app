@@ -79,9 +79,6 @@ Artist.init({
     sequelize,
     modelName: 'Artist'
 });
-
-
-// Add association for main skill
-Skill.belongsTo(Artist, { as: 'mainSkill', foreignKey: 'mainSkillId' });
+    
 
 export default Artist

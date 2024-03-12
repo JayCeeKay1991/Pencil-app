@@ -1,5 +1,5 @@
 import { sequelize } from "./index";
-import { Artist, Project, Location, Skill, Like, Dislike, Comment} from "./models";
+import { Artist, Project, Location, Skill, Like, Dislike, Comment, Work} from "./models";
 
 
 // Define associations
@@ -11,6 +11,9 @@ async function createAssociations() {
         Artist.belongsToMany(Location, { through: 'ArtistLocation' });
         Project.belongsToMany(Artist, { through: 'ProjectArtist' });
         Artist.belongsToMany(Project, { through: 'ProjectArtist' });
+        Artist.belongsTo(Skill, { foreignKey: 'mainSkillId', as: 'mainSkill' });
+        Artist.hasMany(Work, { constraints: true, onDelete: 'CASCADE'});
+        Work.belongsTo(Artist);
     } catch (error) {
         console.error('Error creating associations:', error);
     }
