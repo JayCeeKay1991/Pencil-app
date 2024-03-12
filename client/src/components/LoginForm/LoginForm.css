@@ -33,7 +33,7 @@
   align-self: center;
 }
 
-.form button {
+.loginForm button {
   width: 100%;
   background: var(--light-purple);
   padding: 20px;

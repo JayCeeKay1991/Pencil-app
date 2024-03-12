@@ -38,7 +38,7 @@ export const LoginForm = () => {
 
   return (
     <div className="form-wrapper" >
-    <form className="form" >
+    <form className="form loginForm" >
       <h1>LOGIN</h1>
       <input type="email" placeholder="Email" name="email" value={formValues.email} onChange={changeHandler} required={true} ></input>
       <input type="password" placeholder="Password" name="password" value={formValues.password} onChange={changeHandler} required={true} ></input>

@@ -24,14 +24,14 @@ export const Nav = (): React.JSX.Element => {
   return (
     <nav
       className="nav"
-      style={{ width: isHovered ? "200px" : "50px" }}
+      style={{ width: isHovered ? "200px" : "60px" }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
         <div className="logo">
-          {/* <Link to="/"> */}
+          <Link to="/">
           <img src={logo} className="nav-icon logo" alt="Logo" />
-          {/* </Link> */}
+          </Link>
       </div>
         <hr/>
 

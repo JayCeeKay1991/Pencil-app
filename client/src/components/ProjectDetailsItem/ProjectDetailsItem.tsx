@@ -6,9 +6,8 @@ import { PiThumbsUpLight } from "react-icons/pi";
 import { PiThumbsDownLight } from "react-icons/pi";
 import { GoCommentDiscussion } from "react-icons/go";
 import { ArtistComments } from "../ArtistComments/ArtistComments.js";
-
 import Artist from "../../types/Artist.js";
-import ArtistLikes from "../../types/ArtistLikes.js";
+
 
 interface ProjectDetailsItemProps {
   artist:ArtistLikes;

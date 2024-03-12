@@ -6,8 +6,8 @@ import "./ProjectDetails.css";
 import { getAllProjects } from "../../services/ProjectApi.js";
 import { getLikes } from "../../services/LikesApi.js";
 import { Loading } from "../Loading/Loading.js";
-import ArtistLikes from "../../types/ArtistLikes.js";
 import Project from "../../types/Project.js";
+import Artist from "../../types/Artist.js";
 
 const initialProjectState =  {
   _id: "",
@@ -21,7 +21,7 @@ const initialProjectState =  {
 }
 
 export const ProjectDetails = (): React.JSX.Element => {
-  const [likedArtists, setLikedArtists] = useState<ArtistLikes[]>([]);
+  const [likedArtists, setLikedArtists] = useState<Artist[]>([]);
   const [projects, setProjects] = useState<Project>(initialProjectState)
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();

@@ -8,7 +8,7 @@ myRouter.get("/artists", getArtists);
 // myRouter.post("/artists", addArtist);
 
 myRouter.get("/projects", getProjects);
-myRouter.post("/projects", addProject);
+//myRouter.post("/projects", addProject);
 // myRouter.put("/projects/:id", putProject);
 
 // myRouter.get("/projects/artistLikes/:id", getOneProject);
