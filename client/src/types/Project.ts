@@ -1,5 +1,5 @@
 export default interface Project {
-    _id: string
+    id: number
     projectName: string;
     projectOwner: string;
     description: string;

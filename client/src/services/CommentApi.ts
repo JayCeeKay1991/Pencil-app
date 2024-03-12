@@ -3,12 +3,12 @@ import { apiClient } from "./ApiClient";
 
 
 // Get all comments GET
-export const getComments = async ( projectId: string, artistId: string ) => {
+export const getComments = async ( projectId: number, artistId: number ) => {
   return await apiClient<Comment[]>(`projects/comments/${projectId}/${artistId}`)
 }
 
 // Post new comment POST
-export const postComment = async ( projectId: string, artistId: string, newComment:Partial<Comment> ) => {
+export const postComment = async ( projectId: number, artistId: number, newComment:Partial<Comment> ) => {
   return await apiClient<Comment>(`projects/comments/${projectId}/${artistId}`, 'POST', newComment)
 }
 
