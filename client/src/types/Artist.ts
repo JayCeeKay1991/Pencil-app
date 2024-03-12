@@ -1,16 +1,19 @@
-interface Work {
-    description: string[],
-    images: string,
-    _id: string
-}
+import LocationType from "./Location";
+import Skill from "./Skill";
+import Work from "./Work";
+
 
 export default interface Artist {
-    _id: string;
+    id: number;
     name: string;
-    location: string,
-    rate: string,
-    skills: string[],
-    mainSkill: string,
+    location: LocationType,
+    skills: Skill[],
+    mainSkill: Skill,
     profileImg: string,
-    work: Work[]
+    rateAmount: number,
+    rateType: string,
+    rateCurrency: string,
+    mainSkillId: number
+    Works: Work[],
 }
+

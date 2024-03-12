@@ -25,11 +25,11 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
     <div className="artistContainer">
       <div className="hover">
         <DropDownList onSelectProject={handleClick} />
-          <Link to={`/artistDetails/${artist._id}`}><div className="clickable"></div></Link>
+          <Link to={`/artistDetails/${artist.id}`}><div className="clickable"></div></Link>
       </div>
 
       <div className="additional-info">
-        <p>{artist.rate.toUpperCase()}</p>
+        <p>{artist.rateCurrency}{artist.rateAmount}{artist.rateType}</p>
       </div>
 
       <div className="artistTop">
@@ -48,7 +48,7 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
         </div>
 
         <div className="fill">
-          <li className="main-skill">{artist.mainSkill}</li>
+          <li className="main-skill">{artist.mainSkill.name}</li>
         </div>
         {/* <ul className="skills-list">
             {artist.skills.map((skill, i) => {
@@ -63,7 +63,7 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
 
       <div className="artistBottom">
         <div className="artist-thumb-crop">
-          <img className="artist-thumb-img" src={artist.work[0].images[0]} />
+          <img className="artist-thumb-img" src={artist.Works[0]?.image} />
         </div>
       </div>
     </div>
