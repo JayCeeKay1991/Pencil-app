@@ -1,12 +1,8 @@
 import { useMainContext } from '../contextComponent';
 import './ArtistComments.css';
 import { PiArrowRight } from 'react-icons/pi';
+import Comment from '../../types/Comment';
 
-interface Comment {
-  comment:string,
-  author:string,
-  timestamp:string
-}
 
 interface ArtistCommentProps {
   comments: Comment[]
@@ -20,7 +16,7 @@ export const ArtistComments = ({comments}: ArtistCommentProps): React.JSX.Elemen
       <h5 className='commentHeading' >COMMENTS</h5>
       <ol className="commentList" >
         {comments.map(comment => {
-              return <li className={`commentItem ${comment.author === user?._id ? 'myCommentItem' : ''}`} >{comment.comment}</li>
+              return <li className={`commentItem ${comment.author === user?._id ? 'myCommentItem' : ''}`} >{comment.content}</li>
           })}
         <li className='commentItem myCommentItem' >My comment</li>
         <li className='commentItem' >Someone else's comment</li>

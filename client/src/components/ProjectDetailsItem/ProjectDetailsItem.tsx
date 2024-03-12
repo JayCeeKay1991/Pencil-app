@@ -2,31 +2,37 @@ import { updateLikes, updateDislikes } from "../../services/LikesApi.js";
 import { useState, useEffect } from "react";
 import { useMainContext } from "../contextComponent.js";
 import "./ProjectDetailsItem.css";
-import { PiThumbsUpLight } from "react-icons/pi";
-import { PiThumbsDownLight } from "react-icons/pi";
+import { PiThumbsDownLight, PiThumbsUpLight } from "react-icons/pi";
 import { GoCommentDiscussion } from "react-icons/go";
 import { ArtistComments } from "../ArtistComments/ArtistComments.js";
 import Artist from "../../types/Artist.js";
+import LikeDislike from "../../types/LikeDislike.js";
+import Comment from "../../types/Comment.js";
 
 
 interface ProjectDetailsItemProps {
-  artist:ArtistLikes;
+  artist:Artist;
 }
 
 
 export const ProjectDetailsItem = ({ artist }: ProjectDetailsItemProps): React.JSX.Element => {
-  const [likes, setLikes] = useState<number>(0);
-  const [dislikes, setDislikes] = useState<number>(0);
+  const [likes, setLikes] = useState<LikeDislike>();
+  const [dislikes, setDislikes] = useState<LikeDislike>();
+  const [comments, setComments] = useState<Comment[]>([]);
   const [showComments, setShowComments] = useState<boolean>(false);
   const { fullArtists, setFullArtists } = useMainContext();
 
   useEffect(() => {
     async function fetchAndSet() {
-      setLikes(artist.numberOfLikes);
-      setDislikes(artist.numberOfDislikes);
+      setLikes(likes.amount);
+      setDislikes(dislikes.amount);
+      setComments(commentsByArtist)
     }
     fetchAndSet();
   }, []);
+
+
+
 
   async function updateLikedArtist(id:string) {
     await updateLikes(id);
