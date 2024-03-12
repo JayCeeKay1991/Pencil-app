@@ -16,6 +16,7 @@ export const ArtistList = () => {
 
    useEffect(() => {
      const delay = setTimeout(() => {
+       console.log(fullArtists);
        setArtists(fullArtists);
        setIsLoading(false);
      }, 1500);
@@ -52,7 +53,7 @@ export const ArtistList = () => {
         <ul className="list">
           {artists.map((artist) => {
             return (
-              <div key={artist._id}>
+              <div key={artist.id}>
                 <ArtistListItem artist={artist} />
               </div>
             );
