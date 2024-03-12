@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, ManyToOne, JoinColumn, JoinTable } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, ManyToOne, JoinColumn, JoinTable, OneToMany } from "typeorm";
 import { Project } from "./Project";
 import { Skill } from "./Skill";
 import { Location } from "./Location";
+import { Work } from "./Work";
 
 @Entity()
 export class Artist {
@@ -40,4 +41,7 @@ export class Artist {
 
     @ManyToOne(() => Location, (location) => location.artists)
     location: Location
+
+    @OneToMany(() => Work, (work) => work.artist)
+    work: Work[]
 }

@@ -4,6 +4,7 @@ import { Artist } from "./entity/Artist"
 import { Project } from "./entity/Project"
 import { Skill } from "./entity/Skill"
 import { Location } from "./entity/Location"
+import { Work } from "./entity/Work"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
     database: "pencil",
     synchronize: true,
     logging: false,
-    entities: [Artist, Project, Skill, Location],
+    entities: [Artist, Project, Skill, Location, Work],
     migrations: [],
     subscribers: [],
 })
