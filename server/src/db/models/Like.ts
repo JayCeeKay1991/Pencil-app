@@ -8,6 +8,10 @@ interface LikeAttributes {
     amount: number,
     createdAt: Date,
     updatedAt: Date,
+    ArtistId: number,
+    ProjectId: number
+    
+
 }
 
 class Like extends Model<LikeAttributes> implements LikeAttributes {
@@ -15,6 +19,9 @@ class Like extends Model<LikeAttributes> implements LikeAttributes {
     public amount!: number;
     public createdAt!: Date;
     public updatedAt!: Date;
+    public ArtistId!: number;
+    public ProjectId!: number;
+   
 }
 
 Like.init({
@@ -35,14 +42,21 @@ Like.init({
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
+    },
+    ArtistId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    ProjectId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     sequelize,
     modelName: 'Like'
 })
 
-// Define associations
-Like.belongsTo(Artist, { foreignKey: 'artistId' });
-Like.belongsTo(Project, { foreignKey: 'projectId' });
+Like.belongsTo(Artist, { foreignKey: 'ArtistId' });
+Like.belongsTo(Project, { foreignKey: 'ProjectId' });
 
 export default Like

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Op } from 'sequelize';
 import { Artist, Project, Location, Skill, Like, Dislike, Comment, Work } from "../db/models";
 
 // import  { Artist, Project, ArtistLikes } from "../models/events";
@@ -11,9 +12,9 @@ export const getArtists = async (req: Request, res: Response) => {
     try {
         const artists = await Artist.findAll({
             include: [{
-                model: Skill, 
-                as: 'mainSkill', 
-                attributes: ['id', 'name'] 
+                model: Skill,
+                as: 'mainSkill',
+                attributes: ['id', 'name']
             },
             {
                 model: Work,
@@ -25,7 +26,6 @@ export const getArtists = async (req: Request, res: Response) => {
         res.status(500).json('Error retrieving Artists');
     }
 };
-
 
 
 // //Post Artist
@@ -45,7 +45,7 @@ export const getArtists = async (req: Request, res: Response) => {
 // // PROJECTS
 
 //Get all projects
-export const getProjects = async (req:Request, res:Response) => {
+export const getProjects = async (req: Request, res: Response) => {
     try {
         const projects = await Project.findAll();
         res.status(200).json(projects)
@@ -84,91 +84,102 @@ export const getProjects = async (req:Request, res:Response) => {
 
 // // ARTIST LIKES
 
-// //Get one project's Artist Likes 
-// export const getOneProject = async (req:Request, res:Response) => {
-//   try {
-//     const id = req.params.id;
-//     const project:ArtistLikesType[] = await ArtistLikes.find({ project: id });
-//     res.status(200);
-//     res.send(project);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500); // Internal server error
-//     res.send(error);
-//   }
-// };
+// // get all likes associated with artist and project
+export const getLikes = async (req: Request, res: Response) => {
+    try {
+        const likes = await Like.findAll({
+            where: {
+                ArtistId: req.params.artistId,
+                ProjectId: req.params.projectId
+            }
+        });
+        res.status(200).json(likes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('ERROR');
+    }
+}
 
-// // Add artist and artist likes to project PUT
-// export const putProject = async (req:Request, res:Response) => {
-//   try {
-//     const projectId:String = req.params.id;
-//     const artist:ArtistType = req.body;
-//     const filter = { _id: projectId };
-//     const artistLikes:ArtistLikesType = await ArtistLikes.create({
-//       artist,
-//       project: projectId,
-//     });
-//     const updated = await Project.findByIdAndUpdate(
-//       filter,
-//       { $push: { artists: artistLikes } },
-//       { new: true }
-//     );
-//     res.status(201);
-//     res.send(updated);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500);
-//     res.send(error);
-//   }
-// };
 
-// //Get projects artist likes
-// export const getArtistLikes = async (req:Request, res:Response) => {
-//   try {
-//     const event:ArtistLikesType[] = await ArtistLikes.find({});
-//     res.status(200);
-//     res.send(event);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500); // Internal server error
-//     res.send(error);
-//   }
-// };
+// add like
+export const addLike = async (req: Request, res: Response) => {
+    try {
+        const like = await Like.findOrCreate(
+            { where: { 
+                ArtistId: req.params.artistId, 
+                ProjectId: req.params.projectId
+             } 
+            })
+        like[0].amount++;
+        await like[0].save()
+        res.status(201).json(like[0]);
+    } catch (error) {
+        res.status(500)
+    }
+}
 
-// //Update likes
-// export const updateLikes = async (req:Request, res:Response) => {
-// try {
-//     const id = req.params.id;
-//     console.log(id);
-//     const artist = await ArtistLikes.findOneAndUpdate(
-//       { _id: id },
-//       { $inc: { numberOfLikes: 1 } },
-//       { new: true }
-//     );
-//     res.status(201);
-//     res.send(artist);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500);
-//     res.send(error);
-//   }
-// };
+// ARTIST DISLIKES
 
-// //Update Dislikes
-// export const updateDislikes = async (req:Request, res:Response) => {
-//   try {
-//     const id = req.params.id;
-//     console.log(id);
-//     const artist = await ArtistLikes.findOneAndUpdate(
-//       { _id: id },
-//       { $inc: { numberOfDislikes: 1 } },
-//       { new: true }
-//     );
-//     res.status(201);
-//     res.send(artist);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500);
-//     res.send(error);
-//   }
-// };
+// // get all dislikes associated with artist and project
+export const getDislikes = async (req: Request, res: Response) => {
+    try {
+        const likes = await Dislike.findAll({
+            where: {
+                ArtistId: req.params.artistId,
+                ProjectId: req.params.projectId
+            }
+        });
+        res.status(200).json(likes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('ERROR');
+    }
+}
+
+// add dislike
+export const addDislike = async (req: Request, res: Response) => {
+    try {
+        const dislike = await Dislike.findOrCreate(
+            { where: { 
+                ArtistId: req.params.artistId, 
+                ProjectId: req.params.projectId
+             } 
+            })
+        dislike[0].amount++;
+        await dislike[0].save()
+        res.status(201).json(dislike[0]);
+    } catch (error) {
+        res.status(500)
+    }
+}
+
+// COMMENTS
+
+// // get all dislikes associated with artist and project
+export const getCommments = async (req: Request, res: Response) => {
+    try {
+        const comments = await Comment.findAll({
+            where: {
+                ArtistId: req.params.artistId,
+                ProjectId: req.params.projectId
+            }
+        });
+        res.status(200).json(comments);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('ERROR');
+    }
+}
+
+// add dislike
+export const addComment = async (req: Request, res: Response) => {
+    try {
+        const comment = await Comment.create(req.body);
+        res.status(201).json(comment);
+    } catch (error) {
+        res.status(500)
+    }
+}
+
+
+

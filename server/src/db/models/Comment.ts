@@ -9,6 +9,8 @@ interface CommentAttributes {
     content: string,
     createdAt: Date,
     updatedAt: Date,
+    ArtistId: number,
+    ProjectId: number
 }
 
 class Comment extends Model<CommentAttributes> implements CommentAttributes {
@@ -17,6 +19,8 @@ class Comment extends Model<CommentAttributes> implements CommentAttributes {
     public content!: string;
     public createdAt!: Date;
     public updatedAt!: Date;
+    public ArtistId!: number;
+    public ProjectId!: number;
 }
 
 Comment.init({
@@ -41,6 +45,14 @@ Comment.init({
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
+    },
+    ArtistId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    ProjectId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     sequelize,
@@ -48,7 +60,7 @@ Comment.init({
 })
 
 // Define associations
-Comment.belongsTo(Artist, { foreignKey: 'artistId' });
-Comment.belongsTo(Project, { foreignKey: 'projectId' });
+Comment.belongsTo(Artist, { foreignKey: 'ArtistId' });
+Comment.belongsTo(Project, { foreignKey: 'ProjectId' });
 
 export default Comment

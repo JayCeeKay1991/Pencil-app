@@ -23,10 +23,10 @@ async function createAssociations() {
 export async function syncDb() {
     try {
         await sequelize.sync({ alter: true });
+        await createAssociations();
         await Comment.sync();
         await Like.sync();
         await Dislike.sync();
-        await createAssociations();
         console.log("Database synchronization completed.");
     } catch (error) {
         console.error('Error synchronizing database:', error);
