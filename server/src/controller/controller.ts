@@ -4,13 +4,28 @@ import { Artist, Project, Location, Skill, Like, Dislike, Comment, Work } from "
 
 // import  { Artist, Project, ArtistLikes } from "../models/events";
 
-
 // ARTISTS
 
 //Get Artists
-export const getArtists = async (req: Request, res: Response) => {
+export const getArtistsByProject = async (req: Request, res: Response) => {
     try {
         const artists = await Artist.findAll({
+            where: {
+                ProjectId: req.params.projectId
+            }
+        });
+        res.status(200).json(artists);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('ERROR');
+    }
+};
+
+
+//Get Artists by project
+export const getArtists = async (req: Request, res: Response) => {
+    try {
+        const artists = await Artist.findOne({
             include: [{
                 model: Skill,
                 as: 'mainSkill',
@@ -105,10 +120,10 @@ export const getLikes = async (req: Request, res: Response) => {
 export const addLike = async (req: Request, res: Response) => {
     try {
         const like = await Like.findOrCreate(
-            { where: { 
-                ArtistId: req.params.artistId, 
+            { where: {
+                ArtistId: req.params.artistId,
                 ProjectId: req.params.projectId
-             } 
+             }
             })
         like[0].amount++;
         await like[0].save()
@@ -140,10 +155,10 @@ export const getDislikes = async (req: Request, res: Response) => {
 export const addDislike = async (req: Request, res: Response) => {
     try {
         const dislike = await Dislike.findOrCreate(
-            { where: { 
-                ArtistId: req.params.artistId, 
+            { where: {
+                ArtistId: req.params.artistId,
                 ProjectId: req.params.projectId
-             } 
+             }
             })
         dislike[0].amount++;
         await dislike[0].save()

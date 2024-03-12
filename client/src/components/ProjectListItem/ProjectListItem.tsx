@@ -13,7 +13,7 @@ export const ProjectListItem = ({ project }: ProjectListItemProps): React.JSX.El
 
   return (
     <div className="projectThumbWrap" data-testid="project-item-wrap" >
-      <Link to={`/projectDetails/${project._id}`}>
+      <Link to={`/projectDetails/${project.id}`}>
         <div className="projectThumb">
           <img src={project.thumbImage} className="project-thumb-img"></img>
         </div>
