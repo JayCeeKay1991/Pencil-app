@@ -1,6 +1,5 @@
 import { addLike, addDislike, getLikes, getDislikes } from "../../services/LikesApi.js";
 import { useState, useEffect } from "react";
-import { useMainContext } from "../contextComponent.js";
 import "./ProjectDetailsItem.css";
 import { PiThumbsDownLight, PiThumbsUpLight } from "react-icons/pi";
 import { GoCommentDiscussion } from "react-icons/go";
@@ -20,6 +19,8 @@ interface ProjectDetailsItemProps {
 const initialLikeDislikeState = {
   id: 0,
   amount: 0,
+  createdAt: new Date(),
+  updatedAt: new Date()
 }
 
 
@@ -28,7 +29,6 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
   const [dislike, setDislike] = useState<LikeDislike>();
   const [comments, setComments] = useState<Comment[]>([]);
   const [showComments, setShowComments] = useState<boolean>(false);
-  const { fullArtists, setFullArtists } = useMainContext();
 
   useEffect(() => {
     async function fetchAndSet() {
@@ -73,30 +73,30 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
 
 
 
-  function getArtistData<T extends keyof Artist> (artist:Artist, property:T ) {
-    const searchedArtist = fullArtists.find((fullArtist: Artist) => fullArtist.id === artist.id);
-    if (!searchedArtist) return 'Artist Not Found';
-    else {
-      if (property in searchedArtist) return searchedArtist[property];
-      else return 'Property not found';
-    }
-  }
+  // function getArtistData<T extends keyof Artist> (artist:Artist, property:T ) {
+  //   const searchedArtist = fullArtists.find((fullArtist: Artist) => fullArtist.id === artist.id);
+  //   if (!searchedArtist) return 'Artist Not Found';
+  //   else {
+  //     if (property in searchedArtist) return searchedArtist[property];
+  //     else return 'Property not found';
+  //   }
+  // }
 
   return (
     <div className="projectItemWithComments" >
     <div className="projectItemWrap">
       <div className="check">
         <div className="img-crop">
-          <img src={getArtistData(artist, "profileImg")}></img>
+          <img src={artist.profileImg}></img>
         </div>
         <div className="artist-info">
-          <p>{getArtistData(artist, "name")}</p>
-          <p>{getArtistData(artist, "mainSkill")}</p>
+          <p>{artist.name}</p>
+          <p>{artist.mainSkill.name}</p>
         </div>
       </div>
 
       <div className="middle">
-        <p className="rated"> {getArtistData(artist, "rate")}</p>
+        <p className="rated"> {`${artist.rateCurrency} ${artist.rateAmount} ${artist.rateType}`}</p>
       </div>
 
       <div className="votes">
