@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, MouseEvent, SubmitEvent } from "react";
+import { useState, ChangeEvent, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMainContext } from "../contextComponent"
 import './LoginForm.css';
@@ -34,7 +34,6 @@ export const LoginForm = () => {
     }
     logInAndSet(formValues);
   };
-
 
 
   return (
