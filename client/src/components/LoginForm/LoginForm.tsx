@@ -24,7 +24,7 @@ export const LoginForm = () => {
   // submitting login form
   const handleLogin = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    async function logInAndSet (formValues) {
+    async function logInAndSet (formValues:Partial<User>) {
       const { email, password } = formValues;
       const user = { email, password };
       const loggedInUser = await login(user);

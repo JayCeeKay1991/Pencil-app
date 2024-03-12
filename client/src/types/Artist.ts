@@ -14,6 +14,6 @@ export default interface Artist {
     rateType: string,
     rateCurrency: string,
     mainSkillId: number
-    Works: Work[],
+    work: Work[],
 }
 

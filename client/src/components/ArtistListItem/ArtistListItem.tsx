@@ -17,7 +17,7 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
   }
 
   // Add artist
-  async function handleClick(projectId: string) {
+  async function handleClick(projectId: number) {
      await addArtistToProject(artist, projectId);
    }
 
@@ -63,7 +63,7 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
 
       <div className="artistBottom">
         <div className="artist-thumb-crop">
-          <img className="artist-thumb-img" src={artist.Works[0]?.image} />
+          <img className="artist-thumb-img" src={artist.work[0]?.image} />
         </div>
       </div>
     </div>

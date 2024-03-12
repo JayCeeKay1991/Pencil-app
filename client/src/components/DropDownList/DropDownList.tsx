@@ -4,13 +4,13 @@ import { getAllProjects } from "../../services/ProjectApi";
 import Project from "../../types/Project";
 
 interface DropDownListProps {
-  onSelectProject: (id: string) => void;
+  onSelectProject: (id: number) => void;
 }
 
 export const DropDownList = ({onSelectProject} : DropDownListProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedProject, setSelectedProject] = useState<string>("");
+  const [selectedProject, setSelectedProject] = useState<number>(0);
 
   useEffect(() => {
     async function fetchAndSet() {
@@ -27,7 +27,7 @@ export const DropDownList = ({onSelectProject} : DropDownListProps) => {
   };
 
   // Handle click
-  const handleProjectSelect = (projectId: string) => {
+  const handleProjectSelect = (projectId: number) => {
     setSelectedProject(projectId);
     onSelectProject(projectId);
     setIsDropdownOpen(false);
@@ -43,7 +43,7 @@ export const DropDownList = ({onSelectProject} : DropDownListProps) => {
             <ul>
               {projects.map((project, i) => {
                 return (
-                  <li key={i} onClick={() => handleProjectSelect(project._id)}>
+                  <li key={i} onClick={() => handleProjectSelect(project.id)}>
                     <a>{project.projectName}</a>
                   </li>
                 );

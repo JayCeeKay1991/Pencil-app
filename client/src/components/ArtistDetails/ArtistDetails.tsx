@@ -9,14 +9,17 @@ import { Loading } from "../Loading/Loading.js";
 import Artist from "../../types/Artist";
 
 const initialArtistState =  {
-  _id: "",
-name: "",
-location: "",
-rate: "",
-skills: [],
-mainSkill: "",
-profileImg: "",
-work: []
+  id: 0,
+  name: "",
+  location: "",
+  rateAmount: 0,
+  rateCurrency: "",
+  rateType: "",
+  skills: [],
+  mainSkill: {},
+  mainSkillId: 0,
+  profileImg: "",
+  work: []
 }
 
 interface ArtistDetailsProps {
@@ -34,9 +37,9 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
 
   useEffect(() => {
       const delay = setTimeout(() => {
-        const artist = fullArtists.find((fullArtist: Artist) => fullArtist._id === id);
-        if (artist) {
-          setChosenArtist(artist);
+        if (id) {
+          const artist = fullArtists.find((fullArtist: Artist) => fullArtist.id === +id);
+          if (artist) setChosenArtist(artist);
         }
         setIsLoading(false);
       }, 600);
@@ -68,7 +71,7 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
                 <div className="space">
                   <p>RATE</p>
                   <div className="border">
-                    <p>{chosenArtist.rate}</p>
+                    <p>{chosenArtist.rateAmount}</p>
                   </div>
                 </div>
                 <div className="space">
@@ -76,7 +79,7 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
                   <ul>
                     {chosenArtist.skills &&
                       chosenArtist.skills.map((skill, index) => (
-                        <li key={index}>{skill}</li>
+                        <li key={index}>{skill.name}</li>
                       ))}
                   </ul>
                 </div>
@@ -94,7 +97,7 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
                     <li key={i}>
                       <article className="story">
                         <div className="story-img-crop">
-                          <img src={item.images}></img>
+                          <img src={item.image}></img>
                         </div>
                         <div className="artistProjectInfo">
                           <p>PROJECT</p>

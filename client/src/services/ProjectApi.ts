@@ -9,12 +9,12 @@ export const getAllProjects =  async () => {
 }
 
 // Add new projects POST
-export const addNewProject = async ( projectData: Omit<Project, "_id">) => {
+export const addNewProject = async ( projectData: Omit<Project, "id">) => {
     return await apiClient<Project>('projects', 'POST', projectData)
 }
 
 // Add new artist to existing project PUT
-export const addArtistToProject = async ( artistData: Omit<Artist, "_id">, projectId: string ) => {
+export const addArtistToProject = async ( artistData: Omit<Artist, "id">, projectId: number ) => {
     return await apiClient<Project>(`projects/${projectId}`, 'PUT', artistData)
 }
 

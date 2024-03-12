@@ -56,7 +56,7 @@ export const AddProject = ({setFormVisibility, setProjects, formVisibility}:  Ad
       newThumbnail
     ) {
       const newOwner = "user";
-      const newProject: Omit<Project, "_id"> = {
+      const newProject: Omit<Project, "id"> = {
         projectOwner: newOwner,
         description: newDescription,
         projectName: newName,
