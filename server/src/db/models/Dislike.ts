@@ -8,6 +8,8 @@ interface DislikeAttributes {
     amount: number,
     createdAt: Date,
     updatedAt: Date,
+    ArtistId: number,
+    ProjectId: number
 }
 
 class Dislike extends Model<DislikeAttributes> implements DislikeAttributes {
@@ -15,6 +17,8 @@ class Dislike extends Model<DislikeAttributes> implements DislikeAttributes {
     public amount!: number;
     public createdAt!: Date;
     public updatedAt!: Date;
+    public ArtistId!: number;
+    public ProjectId!: number;
 }
 
 Dislike.init({
@@ -35,6 +39,14 @@ Dislike.init({
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
+    },
+    ArtistId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    ProjectId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     sequelize,
@@ -42,7 +54,7 @@ Dislike.init({
 })
 
 // Define associations
-Dislike.belongsTo(Artist, { foreignKey: 'artistId' });
-Dislike.belongsTo(Project, { foreignKey: 'projectId' });
+Dislike.belongsTo(Artist, { foreignKey: 'ArtistId' });
+Dislike.belongsTo(Project, { foreignKey: 'ProjectId' });
 
 export default Dislike;
