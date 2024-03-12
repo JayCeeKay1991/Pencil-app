@@ -20,7 +20,7 @@ myRouter.put("/dislikes/:projectId/:artistId", addDislike);
 // myRouter.put("/projects/artistLikes/dislike/:id", updateDislikes);
 
 myRouter.get("/projects/comments/:projectId/:artistId", getCommments);
-myRouter.post("/likes/:projectId/:artistId", addComment);
+myRouter.post("/projects/comments/:projectId/:artistId", addComment);
 
 
 
