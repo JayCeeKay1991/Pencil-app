@@ -1,11 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, OneToMany, JoinTable } from "typeorm";
 import { Artist } from "./Artist";
+import { Like } from "./Like";
+import { Dislike } from "./Dislike";
 
 @Entity()
 export class Project {
     @PrimaryGeneratedColumn()
     id: number
-    
+
     @Column()
     owner: string
 
@@ -34,4 +36,9 @@ export class Project {
     @JoinTable()
     artists: Artist[]
 
+    @OneToMany(() => Like, like => like.project)
+    likes: Like[];
+
+    @OneToMany(() => Dislike, dislike => dislike.user)
+    dislikes: Dislike[];
 }
