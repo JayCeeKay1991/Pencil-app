@@ -1,42 +1,31 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from "../data-source";
 import { Artist } from '../entity/Artist';
+import { Project } from '../entity/Project';
 
 const myDataSource = AppDataSource;
 
 
-// // ARTISTS
 
+// GET ALL ARTISTS
 export const getArtists = async (req: Request, res: Response ) => {
-    console.log('trying to get all artists')
     try {
         const artists = await myDataSource.manager.find(Artist, {
             relations: {
                 skills: true,
+                work: true,
+                location: true,
             }
         });
-        res.json(artists)
+        res.status(200).json(artists)
     } catch (error) {
         console.error(error);
         res.status(500).json(`An error occured getting all artists ${error}`)
     }
 }
 
-// //Get Artists
-// export const getArtistsByProject = async (req: Request, res: Response) => {
-//     try {
-//         const artists = await Artist.findAll({
-//             where: {
-//                 ProjectId: req.params.projectId
-//             }
-//         });
-//         res.status(200).json(artists);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json('ERROR');
-//     }
-// };
 
+// GET ALL ARTISTS FOR A PROJECT
 
 // //Get Artists by project
 // export const getArtists = async (req: Request, res: Response) => {
@@ -73,9 +62,25 @@ export const getArtists = async (req: Request, res: Response ) => {
 // // };
 
 
-// // // PROJECTS
+//  PROJECTS
 
-// //Get all projects
+// GET ALL PROJECTS
+export const getProjects = async (req: Request, res: Response ) => {
+    try {
+        const projects = await myDataSource.manager.find(Project, {
+            relations: {
+                artists: true,
+            }
+        });
+        res.status(200).json(projects)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(`An error occured getting all artists ${error}`)
+    }
+}
+
+
+
 // export const getProjects = async (req: Request, res: Response) => {
 //     try {
 //         const projects = await Project.findAll();

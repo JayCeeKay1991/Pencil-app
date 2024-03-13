@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getArtists } from "./controller/controller";
+import { getArtists, getProjects } from "./controller/controller";
 
 
 const myRouter = Router();
@@ -9,7 +9,7 @@ myRouter.get("/artists", getArtists);
 
 // //myRouter.post("/artists", addArtist);
 
-// myRouter.get("/projects", getProjects);
+myRouter.get("/projects", getProjects);
 // // myRouter.post("/projects", addProject);
 // // myRouter.put("/projects/:id", putProject);
 
