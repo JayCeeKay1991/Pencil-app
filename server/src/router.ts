@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getArtists, getProjects } from "./controller/controller";
+import { getArtists, getProjects, getProject, addProject, addArtistToProject} from "./controller/controller";
 
 
 const myRouter = Router();
@@ -10,8 +10,9 @@ myRouter.get("/artists", getArtists);
 // //myRouter.post("/artists", addArtist);
 
 myRouter.get("/projects", getProjects);
-// // myRouter.post("/projects", addProject);
-// // myRouter.put("/projects/:id", putProject);
+myRouter.get("/projects/:projectId", getProject)
+myRouter.post("/projects", addProject);
+myRouter.put("/projects/:projectId/:artistId", addArtistToProject);
 
 // myRouter.get("/likes/:projectId/:artistId", getLikes);
 // myRouter.put("/likes/:projectId/:artistId", addLike);
