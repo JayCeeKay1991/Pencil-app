@@ -17,15 +17,12 @@ export class Comment {
     updatedAt: Date;
 
     @ManyToOne(() => User)
-    @JoinColumn({ name: 'userId' })
     user: User;
 
     @ManyToOne(() => Artist)
-    @JoinColumn({ name: 'artistId' })
     artist: Artist;
 
     @ManyToOne(() => Project)
-    @JoinColumn({ name: 'projectId' })
     project: Project;
 }
 

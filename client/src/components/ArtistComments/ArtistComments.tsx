@@ -20,6 +20,7 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
   const { user } = useMainContext();
 
   const handleCommentChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(comment)
     setComment(e.target.value)
   }
 
@@ -32,6 +33,7 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
       }
       const newComment = await addComment(artist.id, project.id, commentData);
       setComments([...comments, newComment])
+      setComment("");
     }
   }
 
@@ -48,8 +50,8 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
         <li className='commentItem' >Someone else's comment</li>
       </ol>
       <form className='commentForm' >
-        <input type="text" placeholder="Comment on this pick.." onChange={handleCommentChange}></input>
-        <button type="submit" onSubmit={handleSubmitComment} >
+        <input type="text" placeholder="Comment on this pick.." onChange={handleCommentChange} value={comment}></input>
+        <button type="button" onClick={handleSubmitComment} >
           <PiArrowRight size={25} />
         </button>
       </form>

@@ -31,7 +31,7 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
     async function fetchAndSet() {
       const likeForArtist = await getLikes(project.id, artist.id);
       const dislikeForArtist = await getDislikes(project.id, artist.id);
-      const commentsForArtist = await getComments(project.id, artist.id);
+      // const commentsForArtist = await getComments(project.id, artist.id);
 
       if (likeForArtist) setLike(likeForArtist);
 
@@ -109,7 +109,7 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
         </div>
       </div>
       {
-        showComments ? <ArtistComments artist={artist} project={project} comments={comments} ></ArtistComments> : <></>
+        showComments ? <ArtistComments artist={artist} project={project} comments={comments} setComments={setComments} ></ArtistComments> : <></>
       }
     </div>
   );

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login, getArtists, getArtist, getProjects, getProject, addProject, addArtistToProject, addLike, getLikes, addDislike, getDislikes} from "./controller/controller";
+import { login, getArtists, getArtist, getProjects, getProject, addProject, addArtistToProject, addLike, getLikes, addDislike, getDislikes, addComment} from "./controller/controller";
 
 
 const myRouter = Router();
@@ -24,7 +24,7 @@ myRouter.post("/likes/:projectId/:artistId", addLike);
 myRouter.get("/dislikes/:projectId/:artistId", getDislikes);
 myRouter.post("/dislikes/:projectId/:artistId", addDislike);
 
-myRouter.get("/projects/comments/:projectId/:artistId", getCommments);
+// myRouter.get("/projects/comments/:projectId/:artistId", getCommments);
 myRouter.post("/projects/comments/:projectId/:artistId", addComment);
 
 

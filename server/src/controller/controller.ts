@@ -5,11 +5,11 @@ import { Project } from '../entity/Project';
 import { User } from '../entity/User';
 import { Like } from '../entity/Like';
 import { Dislike } from '../entity/Dislike';
+import { Comment } from '../entity/Comment';
 
 const myDataSource = AppDataSource;
 
 // USERS
-
 
 // POST LOGIN
 export const login = async (req: Request, res: Response) => {
@@ -312,6 +312,46 @@ export const getDislikes = async (req: Request, res: Response) => {
     }
 }
 
+// COMMENTS
+
+// POST NEW COMMENT
+export const addComment = async (req: Request, res: Response) => {
+    const projectId = parseInt(req.params.projectId);
+    const artistId = parseInt(req.params.artistId);
+    const userId = parseInt(req.body.user.id);
+    try {
+        const user = await myDataSource.manager.findOne(User, {
+            where: {
+                id: userId
+            }
+        })
+        const artist = await myDataSource.manager.findOne(Artist, {
+            where: {
+                id: artistId
+            }
+        })
+        const project = await myDataSource.manager.findOne(Project, {
+            where: {
+                id: projectId
+            }
+        })
+        if (user && artist && project) {
+                // Create a new comment
+                const comment = new Comment();
+                // Assign related entities directly
+                comment.content = req.body.content;
+                comment.user = user;
+                comment.artist = artist;
+                comment.project = project;
+                // Save the new comment
+                await myDataSource.manager.save(comment);
+                return res.status(201).json(comment);
+            }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json(`An error occured adding a like ${error}`)
+    }
+}
 
 
 
