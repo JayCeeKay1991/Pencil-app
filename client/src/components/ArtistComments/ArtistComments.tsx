@@ -20,7 +20,6 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
   const { user } = useMainContext();
 
   const handleCommentChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(comment)
     setComment(e.target.value)
   }
 
@@ -32,6 +31,7 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
         user: user
       }
       const newComment = await addComment(artist.id, project.id, commentData);
+      console.log(newComment)
       setComments([...comments, newComment])
       setComment("");
     }
@@ -42,10 +42,11 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
       <h5 className='commentHeading' >COMMENTS</h5>
       <ol className="commentList" >
         {comments.map(comment => {
-              return <li className={`commentItem ${comment.author === user?.id ? 'myCommentItem' : ''}`} >{comment.content}</li>
+          console.log(comment)
+              return <li key={comment.id} className={`commentItem ${comment.user.id === user.id ? 'myCommentItem' : ''}`} >{comment.content}</li>
           })}
-        <li className='commentItem myCommentItem' >My comment</li>
-        <li className='commentItem' >Someone else's comment</li>
+        {/* <li className='commentItem myCommentItem' >My comment</li>
+        <li className='commentItem' >Someone else's comment</li> */}
       </ol>
       <form className='commentForm' >
         <input type="text" placeholder="Comment on this pick.." onChange={handleCommentChange} value={comment}></input>

@@ -1,6 +1,7 @@
+import User from "./User"
 export default interface Comment {
   id: number,
-  author: number,
+  user: User,
   content: string,
   createdAt: Date,
   updatedAt: Date

@@ -345,7 +345,7 @@ export const addComment = async (req: Request, res: Response) => {
                 comment.project = project;
                 // Save the new comment
                 await myDataSource.manager.save(comment);
-                return res.status(201).json(comment);
+                return res.status(201).json('success');
             }
     } catch (error) {
         console.error(error)
@@ -362,6 +362,9 @@ export const getComments = async (req: Request, res: Response) => {
                 where: {
                     artist: {id: artistId },
                     project: {id: projectId }
+                }, 
+                relations: {
+                    user: true,
                 }
             })
             res.status(200).json(comments);
@@ -370,6 +373,4 @@ export const getComments = async (req: Request, res: Response) => {
         res.status(500).json(`An error occurred getting comments: ${error}`);
     }
 }
-
-
 
