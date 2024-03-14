@@ -14,9 +14,8 @@ export const DropDownList = ({onSelectProject} : DropDownListProps) => {
 
   useEffect(() => {
     async function fetchAndSet() {
-      const data = await getAllProjects();
-      console.log('project data', data);
-      setProjects(data);
+      const projects = await getAllProjects();
+      setProjects(projects);
     }
     fetchAndSet();
   }, []);
@@ -44,7 +43,7 @@ export const DropDownList = ({onSelectProject} : DropDownListProps) => {
               {projects.map((project, i) => {
                 return (
                   <li key={i} onClick={() => handleProjectSelect(project.id)}>
-                    <a>{project.projectName}</a>
+                    <a>{project.name}</a>
                   </li>
                 );
               })}

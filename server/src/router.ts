@@ -1,21 +1,23 @@
 import { Router } from "express";
-import { getArtists, getProjects, getProject, addProject, addArtistToProject} from "./controller/controller";
+import { login, getArtists, getProjects, getProject, addProject, addArtistToProject, addLike} from "./controller/controller";
 
 
 const myRouter = Router();
 
+
+myRouter.post("/login", login)
+
 myRouter.get("/artists", getArtists);
-// myRouter.get("/artists/:projectId", getArtistsByProject);
 
 // //myRouter.post("/artists", addArtist);
 
 myRouter.get("/projects", getProjects);
-myRouter.get("/projects/:projectId", getProject)
+myRouter.get("/projects/:projectId", getProject);
 myRouter.post("/projects", addProject);
 myRouter.put("/projects/:projectId/:artistId", addArtistToProject);
 
 // myRouter.get("/likes/:projectId/:artistId", getLikes);
-// myRouter.put("/likes/:projectId/:artistId", addLike);
+myRouter.put("/likes/:projectId/:artistId", addLike);
 
 // myRouter.get("/dislikes/:projectId/:artistId", getDislikes);
 // myRouter.put("/dislikes/:projectId/:artistId", addDislike);

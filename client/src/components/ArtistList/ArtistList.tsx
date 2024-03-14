@@ -16,7 +16,6 @@ export const ArtistList = () => {
 
    useEffect(() => {
      const delay = setTimeout(() => {
-       console.log(fullArtists);
        setArtists(fullArtists);
        setIsLoading(false);
      }, 1500);

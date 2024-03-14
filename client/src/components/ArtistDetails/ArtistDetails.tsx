@@ -64,7 +64,7 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
               </div>
               <div className="narrow">
                 <h3>{chosenArtist.name}</h3>
-                <DropDownListSecond onSelectProject={onSelectProject}/>
+                <DropDownListSecond artistId={chosenArtist.id}/>
               </div>
 
               <div className="artist-infos">

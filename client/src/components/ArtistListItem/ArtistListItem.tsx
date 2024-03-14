@@ -18,7 +18,8 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
 
   // Add artist
   async function handleClick(projectId: number) {
-     await addArtistToProject(artist, projectId);
+    const artistId = artist.id;
+     await addArtistToProject(artistId, projectId);
    }
 
   return (
@@ -48,17 +49,17 @@ export const ArtistListItem = ({artist}: ArtistListItemProps) => {
         </div>
 
         <div className="fill">
-          <li className="main-skill">{artist.mainSkill.name}</li>
+          <li className="main-skill">{artist.mainSkill.toString()}</li>
         </div>
-        {/* <ul className="skills-list">
+        <ul className="skills-list">
             {artist.skills.map((skill, i) => {
               return (
                 <li key={i}>
-                  <p>{skill}</p>
+                  <p>{skill.name}</p>
                 </li>
               );
             })}
-          </ul> */}
+          </ul>
       </div>
 
       <div className="artistBottom">

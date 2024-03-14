@@ -9,6 +9,7 @@ import LikeDislike from "../../types/LikeDislike.js";
 import Comment from "../../types/Comment.js";
 import Project from "../../types/Project.js";
 import { getComments } from "../../services/CommentApi.js";
+import { useMainContext } from "../contextComponent.js";
 
 
 interface ProjectDetailsItemProps {
@@ -50,7 +51,8 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
 
 
   async function updateLikedArtist(projectId:number, artistId:number) {
-    const updatedLike = await addLike(projectId, artistId);
+    const { user } = useMainContext();
+    const updatedLike = await addLike(projectId, artistId, user!.id);
     setLike(updatedLike);
   }
 
@@ -70,17 +72,6 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
   function toggleComments() {
     setShowComments(!showComments);
   }
-
-
-
-  // function getArtistData<T extends keyof Artist> (artist:Artist, property:T ) {
-  //   const searchedArtist = fullArtists.find((fullArtist: Artist) => fullArtist.id === artist.id);
-  //   if (!searchedArtist) return 'Artist Not Found';
-  //   else {
-  //     if (property in searchedArtist) return searchedArtist[property];
-  //     else return 'Property not found';
-  //   }
-  // }
 
   return (
     <div className="projectItemWithComments" >

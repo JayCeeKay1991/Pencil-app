@@ -12,13 +12,13 @@ export const getDislikes = async ( projectId: number, artistId: number ) => {
   return await apiClient<LikeDislike>(`likes/${projectId}/${artistId}`)
 }
 
-// Add like PUT
-export const addLike = async ( projectId: number, artistId: number ) => {
-  return await apiClient<LikeDislike>(`likes/${projectId}/${artistId}`, 'PUT')
+// Add like POST
+export const addLike = async ( projectId: number, artistId: number, userId: number ) => {
+  return await apiClient<LikeDislike>(`likes/${projectId}/${artistId}`, 'POST', userId)
 }
 
-// Add dislike PUT
+// Add dislike POST
 export const addDislike = async ( projectId: number, artistId: number ) => {
-  return await apiClient<LikeDislike>(`dislikes/${projectId}/${artistId}`, 'PUT')
+  return await apiClient<LikeDislike>(`dislikes/${projectId}/${artistId}`, 'POST')
 }
 

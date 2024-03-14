@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import { Artist } from "./Artist";
 import { Like } from "./Like";
 import { Dislike } from "./Dislike";
+import { Comment } from "./Comment";
 
 @Entity()
 export class Project {
@@ -11,7 +12,7 @@ export class Project {
     @Column()
     owner: string
 
-    @Column()
+    @Column({ length: 200 })
     description: string
 
     @Column()
@@ -41,4 +42,7 @@ export class Project {
 
     @OneToMany(() => Dislike, dislike => dislike.user)
     dislikes: Dislike[];
+
+    @OneToMany(() => Comment, comment => comment.project)
+    comments: Comment[];
 }

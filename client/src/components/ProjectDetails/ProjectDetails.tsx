@@ -3,39 +3,34 @@ import { useParams } from "react-router-dom";
 import { ProjectDetailsItem } from "../ProjectDetailsItem/ProjectDetailsItem.js";
 import { PageTitle } from "../PageTitle/pageTitle.js";
 import "./ProjectDetails.css";
-import { getAllProjects } from "../../services/ProjectApi.js";
+import { getProject } from "../../services/ProjectApi.js";
 import { Loading } from "../Loading/Loading.js";
 import Project from "../../types/Project.js";
 import Artist from "../../types/Artist.js";
-import { getArtistsByProject } from "../../services/ArtistApi.js";
 
 const initialProjectState =  {
   id: 0,
   projectName: "",
   projectOwner: "",
   description: "",
-  startDate: "",
-  endDate: "",
+  startDate: Date.now(),
+  endDate: Date.now(),
   thumbImage: "",
   artists: []
 }
 
 export const ProjectDetails = (): React.JSX.Element => {
-  const [likedArtists, setLikedArtists] = useState<Artist[]>([]);
-  const [project, setProject] = useState<Project>(initialProjectState);
+  const [projectArtists, setProjectArtists] = useState<Artist[]>([]);
+  const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = useParams();
 
   useEffect(() => {
     const delay = setTimeout(async () => {
       try {
-        const artistsByProject = await getArtistsByProject(project.id);
-        setLikedArtists(artistsByProject);
-        const projects:Project[] = await getAllProjects();
-        if (id) {
-          const projectTitle = projects.find((project:Project) => project.id === +id);
-          if (projectTitle) setProject(projectTitle);
-        }
+        const project = await getProject(parseInt(id!))
+        setProject(project)
+        setProjectArtists(project.artists)
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -52,7 +47,7 @@ export const ProjectDetails = (): React.JSX.Element => {
         <Loading />
       ) : (
         <>
-          <PageTitle page={project?.projectName || 'No project.'} />
+          <PageTitle page={project!.name} />
 
           <div className="titles">
             <p>CHOSEN ARTISTS</p>
@@ -61,9 +56,9 @@ export const ProjectDetails = (): React.JSX.Element => {
           </div>
 
           <ul className="project-details-List">
-            {likedArtists.map((artist, i) => {
-              return <ProjectDetailsItem key={i} artist={artist} project={project}/>;
-            })}
+            {projectArtists && projectArtists.length ? projectArtists.map((artist, i) => {
+              return <ProjectDetailsItem key={i} artist={artist} project={project!}/>;
+            }): 'No artists'}
           </ul>
         </>
       )}

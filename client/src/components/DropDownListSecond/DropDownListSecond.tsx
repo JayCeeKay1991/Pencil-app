@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import "./DropDownListSecond.css";
 import Project from "../../types/Project.js";
-import { getAllProjects } from "../../services/ProjectApi.js";
+import { getAllProjects } from "../../services/ProjectApi";
+import { addArtistToProject } from "../../services/ProjectApi";
 
-interface DropDownListProps {
-  onSelectProject: (id: number) => void;
+
+interface DropDownListSecondProps {
+  artistId: number;
 }
 
-
-export const DropDownListSecond = ({ onSelectProject }: DropDownListProps) => {
+export const DropDownListSecond = ({artistId} : DropDownListSecondProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedProject, setSelectedProject] = useState<number>(0);
 
   useEffect(() => {
     async function fetchAndSet() {
-      const data = await getAllProjects();
-      setProjects(data);
+      const projects = await getAllProjects()
+      setProjects(projects);
     }
     fetchAndSet();
   }, []);
@@ -26,12 +26,13 @@ export const DropDownListSecond = ({ onSelectProject }: DropDownListProps) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Handle click
-  const handleProjectSelect = (projectId: number) => {
-    setSelectedProject(projectId);
-    onSelectProject(projectId);
-    setIsDropdownOpen(false);
-  };
+  // Add artist
+  async function handleClick(projectId: number) {
+     await addArtistToProject(artistId, projectId);
+     setIsDropdownOpen(false)
+   }
+
+ 
 
   return (
     <div className="dropdownSecond">
@@ -43,8 +44,8 @@ export const DropDownListSecond = ({ onSelectProject }: DropDownListProps) => {
             <ul>
               {projects.map((project, i) => {
                 return (
-                  <li key={i} onClick={() => handleProjectSelect(project.id)}>
-                    <a>{project.projectName}</a>
+                  <li key={i} onClick={() => handleClick(project.id)}>
+                    <a>{project.name}</a>
                   </li>
                 );
               })}

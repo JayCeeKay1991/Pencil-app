@@ -8,21 +8,12 @@ export class Like {
     @PrimaryGeneratedColumn()
     id: number
 
-    @PrimaryColumn()
-    artistId: number;
-
-    @PrimaryColumn()
-    projectId: number;
-
     @ManyToOne(() => User)
-    @JoinColumn({ name: 'userId' })
     user: User;
 
     @ManyToOne(() => Artist)
-    @JoinColumn({ name: 'artistId' })
     artist: Artist;
 
     @ManyToOne(() => Project)
-    @JoinColumn({ name: 'projectId' })
     project: Project;
 }

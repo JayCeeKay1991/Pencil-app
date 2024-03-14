@@ -5,6 +5,7 @@ import { Location } from "./Location";
 import { Work } from "./Work";
 import { Like } from "./Like";
 import { Dislike } from "./Dislike";
+import { Comment } from "./Comment";
 
 
 @Entity()
@@ -50,7 +51,10 @@ export class Artist {
 
     @OneToMany(() => Like, like => like.artist)
     likes: Like[];
-    
+
     @OneToMany(() => Dislike, dislike => dislike.user)
     dislikes: Dislike[];
+
+    @OneToMany(() => Comment, comment => comment.artist)
+    comments: Comment[];
 }
