@@ -8,7 +8,7 @@ export const getComments = async ( projectId: number, artistId: number ) => {
 }
 
 // Post new comment POST
-export const postComment = async ( projectId: number, artistId: number, newComment:Partial<Comment> ) => {
+export const addComment = async ( projectId: number, artistId: number, newComment:Partial<Comment> ) => {
   return await apiClient<Comment>(`projects/comments/${projectId}/${artistId}`, 'POST', newComment)
 }
 

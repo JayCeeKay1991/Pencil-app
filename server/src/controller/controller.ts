@@ -4,6 +4,7 @@ import { Artist } from '../entity/Artist';
 import { Project } from '../entity/Project';
 import { User } from '../entity/User';
 import { Like } from '../entity/Like';
+import { Dislike } from '../entity/Dislike';
 
 const myDataSource = AppDataSource;
 
@@ -39,6 +40,26 @@ export const login = async (req: Request, res: Response) => {
 export const getArtists = async (req: Request, res: Response) => {
     try {
         const artists = await myDataSource.manager.find(Artist, {
+            relations: {
+                skills: true,
+                work: true,
+                location: true,
+            }
+        });
+        res.status(200).json(artists)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(`An error occured getting all artists ${error}`)
+    }
+}
+
+// GET ONE ARTIST
+export const getArtist = async (req: Request, res: Response) => {
+    try {
+        const artists = await myDataSource.manager.find(Artist, {
+            where: {
+                id: parseInt(req.params.artistId)
+            },
             relations: {
                 skills: true,
                 work: true,
@@ -151,7 +172,7 @@ export const addProject = async (req: Request, res: Response) => {
 export const addLike = async (req: Request, res: Response) => {
     const projectId = parseInt(req.params.projectId);
     const artistId = parseInt(req.params.artistId);
-    const userId = parseInt(req.body);
+    const userId = parseInt(req.body.userId);
     try {
         const user = await myDataSource.manager.findOne(User, {
             where: {
@@ -191,7 +212,6 @@ export const addLike = async (req: Request, res: Response) => {
 
                 // Save the new like
                 await myDataSource.manager.save(like);
-
                 return res.status(201).json("Like added successfully.");
             }
 
@@ -201,4 +221,98 @@ export const addLike = async (req: Request, res: Response) => {
         res.status(500).json(`An error occured adding a like ${error}`)
     }
 }
+
+// GET LIKES FOR PROJECT AND ARTIST
+export const getLikes = async (req: Request, res: Response) => {
+    const projectId = parseInt(req.params.projectId);
+    const artistId = parseInt(req.params.artistId);
+    try {
+            const likes = await myDataSource.manager.find(Like, {
+                where: {
+                    artist: {id: artistId },
+                    project: {id: projectId }
+                }
+            })
+            res.status(200).json(likes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(`An error occurred getting likes: ${error}`);
+    }
+}
+
+// POST NEW DISLIKE
+export const addDislike = async (req: Request, res: Response) => {
+    const projectId = parseInt(req.params.projectId);
+    const artistId = parseInt(req.params.artistId);
+    const userId = parseInt(req.body.userId);
+    try {
+        const user = await myDataSource.manager.findOne(User, {
+            where: {
+                id: userId
+            }
+        })
+        const artist = await myDataSource.manager.findOne(Artist, {
+            where: {
+                id: artistId
+            }
+        })
+        const project = await myDataSource.manager.findOne(Project, {
+            where: {
+                id: projectId
+            }
+        })
+        if (user && artist && project) {
+            // check if a like already exists
+            const existingLike = await myDataSource.manager.findOne(Dislike, {
+                where: {
+                    user: user,
+                    artist: artist,
+                    project: project,
+                }
+            });
+            if (existingLike) {
+                res.status(400).json({ message: 'Like already exists' });
+            }
+            else {
+                // Create a new like
+                const dislike = new Dislike();
+
+                // Assign related entities directly
+                dislike.user = user;
+                dislike.artist = artist;
+                dislike.project = project;
+
+                // Save the new like
+                await myDataSource.manager.save(dislike);
+                return res.status(201).json("Dislike added successfully.");
+            }
+
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json(`An error occured adding a like ${error}`)
+    }
+}
+
+// GET DISLIKES FOR PROJECT AND ARTIST
+export const getDislikes = async (req: Request, res: Response) => {
+    const projectId = parseInt(req.params.projectId);
+    const artistId = parseInt(req.params.artistId);
+    try {
+            const dislikes = await myDataSource.manager.find(Dislike, {
+                where: {
+                    artist: {id: artistId },
+                    project: {id: projectId }
+                }
+            })
+            res.status(200).json(dislikes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(`An error occurred getting dislikes: ${error}`);
+    }
+}
+
+
+
+
 

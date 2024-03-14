@@ -8,19 +8,26 @@ import Project from "../types/Project";
 import { ArtistListContextType } from "../types/ArtistListContextType.ts";
 import User from "../types/User.ts";
 
+const initialUserState: User = {
+  id: 0,
+  userName: "",
+  email: "", 
+  password: ""
+}
+
 const initialState:ArtistListContextType = {
-  user: null,
+  user: initialUserState,
   fullArtists: [],
   fullProjects: [],
   setFullArtists: () => [],
   setFullProjects: () => [],
-  setUser: () => null
+  setUser: () => initialUserState,
 }
 
 export const ArtistListContext = createContext<ArtistListContextType>(initialState);
 
 export const ContextComponent = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>(initialUserState);
   const [fullArtists, setFullArtists] = useState<Artist[]>([]);
   const [fullProjects, setFullProjects] = useState<Project[]>([]);
 

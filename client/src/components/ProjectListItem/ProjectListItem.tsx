@@ -19,7 +19,7 @@ export const ProjectListItem = ({ project }: ProjectListItemProps): React.JSX.El
         </div>
       </Link>
       <div>
-        <h3>{project.projectName}</h3>
+        <h3>{project.name}</h3>
         {/* <p>{project.artists.length} Artists</p> */}
         <p>
           {project.artists && project.artists.length

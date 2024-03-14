@@ -38,6 +38,9 @@ export const ArtistList = () => {
     }
   }
 
+  const { user } = useMainContext();
+  console.log(user);
+
   return (
     <div className="wrapper">
       <PageTitle page="Collection" />

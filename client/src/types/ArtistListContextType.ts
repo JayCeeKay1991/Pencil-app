@@ -4,10 +4,10 @@ import User from "./User";
 import { Dispatch, SetStateAction } from "react";
 
 export type ArtistListContextType = {
-    user: User | null;
+    user: User;
     fullArtists: Artist[];
     fullProjects: Project[];
     setFullArtists:  Dispatch<SetStateAction<Artist[]>>;
     setFullProjects:  Dispatch<SetStateAction<Project[]>>;
-    setUser:  Dispatch<SetStateAction<User | null>>;
+    setUser:  Dispatch<SetStateAction<User>>;
 }

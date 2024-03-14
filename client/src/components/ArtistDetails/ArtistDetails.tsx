@@ -11,15 +11,21 @@ import Artist from "../../types/Artist";
 const initialArtistState =  {
   id: 0,
   name: "",
-  location: "",
   rateAmount: 0,
   rateCurrency: "",
   rateType: "",
   skills: [],
-  mainSkill: {},
+  mainSkill: {
+    id: 0,
+    name: ""
+  },
   mainSkillId: 0,
   profileImg: "",
-  work: []
+  work: [],
+  location: {
+    id: 0,
+    name: ""
+  }
 }
 
 interface ArtistDetailsProps {
@@ -36,8 +42,9 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
 
 
   useEffect(() => {
-      const delay = setTimeout(() => {
+      const delay = setTimeout( async () => {
         if (id) {
+          // const artist = await getArtist(parseInt(id));
           const artist = fullArtists.find((fullArtist: Artist) => fullArtist.id === +id);
           if (artist) setChosenArtist(artist);
         }
@@ -83,6 +90,7 @@ export const ArtistDetails  = ({ onSelectProject }: ArtistDetailsProps) => {
                       ))}
                   </ul>
                 </div>
+                <p>{chosenArtist.location.name}</p>
               </div>
             </div>
             <div className="work">

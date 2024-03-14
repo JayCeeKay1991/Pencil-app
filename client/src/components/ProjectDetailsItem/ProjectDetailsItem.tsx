@@ -13,23 +13,19 @@ import { useMainContext } from "../contextComponent.js";
 
 
 interface ProjectDetailsItemProps {
-  artist:Artist,
-  project:Project
-}
-
-const initialLikeDislikeState = {
-  id: 0,
-  amount: 0,
-  createdAt: new Date(),
-  updatedAt: new Date()
+  artist: Artist,
+  project: Project
 }
 
 
 export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps): React.JSX.Element => {
-  const [like, setLike] = useState<LikeDislike>();
-  const [dislike, setDislike] = useState<LikeDislike>();
+  const [like, setLike] = useState<LikeDislike[]>([]);
+  const [dislike, setDislike] = useState<LikeDislike[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
   const [showComments, setShowComments] = useState<boolean>(false);
+  const { user } = useMainContext();
+
+  console.log(user);
 
   useEffect(() => {
     async function fetchAndSet() {
@@ -37,28 +33,30 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
       const dislikeForArtist = await getDislikes(project.id, artist.id);
       const commentsForArtist = await getComments(project.id, artist.id);
 
-      if (!likeForArtist) setLike(initialLikeDislikeState);
-      else setLike(likeForArtist);
+      if (likeForArtist) setLike(likeForArtist);
 
-      if (!dislikeForArtist) setDislike(initialLikeDislikeState);
-      else setDislike(dislikeForArtist);
+      if (dislikeForArtist) setDislike(dislikeForArtist);
 
-      setComments(commentsForArtist);
+      // setComments(commentsForArtist);
     }
     fetchAndSet();
   }, []);
 
 
 
-  async function updateLikedArtist(projectId:number, artistId:number) {
-    const { user } = useMainContext();
-    const updatedLike = await addLike(projectId, artistId, user!.id);
-    setLike(updatedLike);
+  async function updateLikedArtist(projectId: number, artistId: number) {
+    if (user) {
+      const updatedLike = await addLike(projectId, artistId, user.id);
+      setLike([...like, updatedLike]);
+    }
   }
 
-  async function updateDislikedArtist(projectId:number, artistId:number) {
-    const updatedDislike = await addDislike(projectId, artistId);
-    setDislike(updatedDislike);
+  async function updateDislikedArtist(projectId: number, artistId: number) {
+    if (user) {
+      const updatedDislike = await addDislike(projectId, artistId, user.id);
+      setDislike([...dislike, updatedDislike]);
+    }
+
   }
 
   function handleLikes() {
@@ -73,44 +71,46 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
     setShowComments(!showComments);
   }
 
+
+
   return (
     <div className="projectItemWithComments" >
-    <div className="projectItemWrap">
-      <div className="check">
-        <div className="img-crop">
-          <img src={artist.profileImg}></img>
+      <div className="projectItemWrap">
+        <div className="check">
+          <div className="img-crop">
+            <img src={artist.profileImg}></img>
+          </div>
+          <div className="artist-info">
+            <p>{artist.name}</p>
+            <p>{artist.mainSkill.name}</p>
+          </div>
         </div>
-        <div className="artist-info">
-          <p>{artist.name}</p>
-          <p>{artist.mainSkill.name}</p>
+
+        <div className="middle">
+          <p className="rated"> {`${artist.rateCurrency} ${artist.rateAmount} ${artist.rateType}`}</p>
         </div>
-      </div>
 
-      <div className="middle">
-        <p className="rated"> {`${artist.rateCurrency} ${artist.rateAmount} ${artist.rateType}`}</p>
-      </div>
-
-      <div className="votes">
+        <div className="votes">
 
           <button onClick={handleLikes} className="like">
             <PiThumbsUpLight style={{ color: "black" }} size={25} />
-          <p>{like?.amount || 0}</p>
+            <p>{like.length || 0}</p>
           </button>
 
-        <hr />
+          <hr />
           <button onClick={handleDislikes} className="like">
             <PiThumbsDownLight style={{ color: "black" }} size={25} />
-          <p>{dislike?.amount || 0}</p>
+            <p>{dislike.length || 0}</p>
           </button>
           <button onClick={toggleComments} className="like comments">
-            <GoCommentDiscussion  style={{ color: "black" }} size={25} />
+            <GoCommentDiscussion style={{ color: "black" }} size={25} />
             <p>{comments?.length || 0}</p>
           </button>
+        </div>
       </div>
+      {
+        showComments ? <ArtistComments artist={artist} project={project} comments={comments} ></ArtistComments> : <></>
+      }
     </div>
-    {
-      showComments ? <ArtistComments comments={comments} ></ArtistComments> : <></>
-    }
-      </div>
   );
 }

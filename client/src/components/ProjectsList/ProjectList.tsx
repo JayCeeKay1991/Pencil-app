@@ -17,7 +17,7 @@ export function ProjectList() {
   useEffect(() => {
     const delay = setTimeout(() => {
       const alphabetSort = fullProjects.sort((a, b) =>
-        a.projectName > b.projectName ? 1 : -1
+        a.name > b.name ? 1 : -1
       );
       setProjects(alphabetSort);
       setIsLoading(false);
