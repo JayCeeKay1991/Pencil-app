@@ -31,13 +31,13 @@ export const ProjectDetailsItem = ({ artist, project }: ProjectDetailsItemProps)
     async function fetchAndSet() {
       const likeForArtist = await getLikes(project.id, artist.id);
       const dislikeForArtist = await getDislikes(project.id, artist.id);
-      // const commentsForArtist = await getComments(project.id, artist.id);
+      const commentsForArtist = await getComments(project.id, artist.id);
 
       if (likeForArtist) setLike(likeForArtist);
 
       if (dislikeForArtist) setDislike(dislikeForArtist);
 
-      // setComments(commentsForArtist);
+      setComments(commentsForArtist);
     }
     fetchAndSet();
   }, []);

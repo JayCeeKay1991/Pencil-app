@@ -37,8 +37,6 @@ export const ArtistComments = ({comments, artist, project, setComments}: ArtistC
     }
   }
 
-
-
   return (
     <div className="commentWrap">
       <h5 className='commentHeading' >COMMENTS</h5>

@@ -353,6 +353,23 @@ export const addComment = async (req: Request, res: Response) => {
     }
 }
 
+// GET COMMENTS FOR ARTIST ADN PROJECT
+export const getComments = async (req: Request, res: Response) => {
+    const projectId = parseInt(req.params.projectId);
+    const artistId = parseInt(req.params.artistId);
+    try {
+            const comments = await myDataSource.manager.find(Comment, {
+                where: {
+                    artist: {id: artistId },
+                    project: {id: projectId }
+                }
+            })
+            res.status(200).json(comments);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(`An error occurred getting comments: ${error}`);
+    }
+}
 
 
 
