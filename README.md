@@ -2,7 +2,7 @@
 
 Pencil is a tool to organise freelance artists and their projects. Artists can be assigned to projects and the pick can be evaluated and commented. 
 
-<img width="200" alt="Screenshot 2024-04-02 at 10 46 08" src="https://github.com/JayCeeKay1991/Pencil-app/assets/70958275/2ce1d50c-3365-4ab2-9e52-c7c53f6c9fa7">
+<img width="200" alt="Screenshot 2024-04-02 at 11 26 26" src="https://github.com/JayCeeKay1991/Pencil-app/assets/70958275/5754641e-a21d-4ff1-8710-42881fe6404a">
 <img width="500" alt="Screenshot 2024-04-02 at 10 37 09" src="https://github.com/JayCeeKay1991/Pencil-app/assets/70958275/179631be-867f-4911-88a2-3875eddbc884">
 
 
